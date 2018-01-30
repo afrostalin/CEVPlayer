@@ -45,4 +45,16 @@
 # WIKI and lessons
 Please see [CryVideoPlugin WIKI](https://github.com/afrostalin/CryVideoPlugin/wiki)
 
+Fast study functionality with [VideoPluginExample](https://github.com/afrostalin/VideoPluginExample) project
+
 Also you can see youtube lessons [HERE](https://www.youtube.com/user/VseProo100/videos)
+
+# GitHub community
+
+I will be happy with any help from the community, so I'm waiting for your pull requests 
+
+If you have any problem with this plugin please use [GitHub issues](https://github.com/afrostalin/CryVideoPlugin/issues) mechanism
+
+# Contacts
+
+If you need more from me, write me directly to my email : chernecoff@gmail.com
