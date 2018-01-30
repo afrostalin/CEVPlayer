@@ -36,6 +36,14 @@
 
 **Warning №2 : CryVideoPlugin compatible only with CRYENGINE 5.4 now**
 
+**Warning №3 : CryVideoPlugin can play video only in .webm format**
+
+**Warning №4 : All video files should be in `Videos` folder **
+
+**Warning №5 : TextureVideoPlayer not playing audio - use audio triggers for this **
+
+**Warning №6 : Don't use for TextureVideoPlayer video in very hight resolution - it's can be perfomance problems (optimal HD and low) **
+
 # TODO
 * Add ability to play video when level loading (Problem with blocking OnPostUpdate event)
 * Maybe create special shader for YUV->RGBA conversion
