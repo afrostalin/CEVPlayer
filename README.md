@@ -40,7 +40,7 @@
 * Add ability to play video when level loading (Problem with blocking OnPostUpdate event)
 * Maybe create special shader for YUV->RGBA conversion
 * Audio triggers for in-game video
-* Make plugin compatible with CRYENGINE 5.2 - 5.3
+* Make plugin compatible with CRYENGINE 5.3
 
 # WIKI and lessons
 Please see [CryVideoPlugin WIKI](https://github.com/afrostalin/CryVideoPlugin/wiki)
