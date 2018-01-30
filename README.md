@@ -2,7 +2,7 @@
 
 **CryVideoPlugin** - plugin for CRYENGINE V allowing you to play video on the screen and on the game objects
 
-**Video plugin includes :** 
+**It's includes :** 
 * Flowgraph nodes for creating video player (Screen video / Texture video)
 * VideoPlayerComponent for easy integration with new components system
 * Schematic functions for easy creation schematic entitys with video player component
