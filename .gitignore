@@ -1,0 +1,14 @@
+# Temporary directories.
+/solutions/*
+/bin/*
+
+# 3rd projects
+/3rd/libvpx/*
+/3rd/libwebm/*
+/3rd/libogg/*
+/3rd/libvorbis/*
+/3rd/SDL2/*
+/3rd/libav/*
+
+# Log files
+*.log

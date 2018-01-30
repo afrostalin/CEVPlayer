@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "type": "",
+  "info": {
+    "name": "CryVideoPlugin"
+  },
+  "content": {
+    "code": [
+      "Code"
+    ]
+  },
+  "require": {
+    "engine": "engine-5.4"
+  }
+}
