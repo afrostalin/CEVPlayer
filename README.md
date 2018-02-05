@@ -44,6 +44,8 @@
 
 **Warning №6 : Don't use for TextureVideoPlayer video in very hight resolution - it's can be perfomance problems (optimal HD and low)**
 
+**Warning №7 : Don't play video when level loading - you game will be crash!**
+
 # TODO
 * Add ability to play video when level loading (Problem with blocking OnPostUpdate event)
 * Maybe create special shader for YUV->RGBA conversion
@@ -54,8 +56,6 @@
 Please see [CryVideoPlugin WIKI](https://github.com/afrostalin/CryVideoPlugin/wiki)
 
 Fast study functionality with [VideoPluginExample](https://github.com/afrostalin/VideoPluginExample) project
-
-Also you can see youtube lessons [HERE](https://www.youtube.com/user/VseProo100/videos)
 
 # GitHub community
 
