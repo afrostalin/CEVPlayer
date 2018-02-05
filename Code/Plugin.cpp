@@ -133,6 +133,15 @@ bool CVideoPlugin::Initialize(SSystemGlobalEnvironment& env, const SSystemInitPa
 		mEnv->pThreadManager->SpawnDecoderThread();
 	}
 
+	if (gEnv->pConsole != nullptr)
+	{
+		ICVar* pStartScreen = gEnv->pConsole->GetCVar("sys_rendersplashscreen");
+		if (pStartScreen != nullptr)
+		{
+			pStartScreen->Set(0);
+		}
+	}
+
 	return true;
 }
 
