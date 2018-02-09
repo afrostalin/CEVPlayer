@@ -1,5 +1,3 @@
-![](https://pp.userapi.com/c824410/v824410521/9f3e6/BRwTG3N1alM.jpg)
-
 **CryVideoPlayer** - plugin for CRYENGINE V allowing you to play video on the screen and on the game objects
 
 **It's includes :** 
