@@ -1,6 +1,6 @@
 ![](https://pp.userapi.com/c824410/v824410521/9f3e6/BRwTG3N1alM.jpg)
 
-**CryVideoPlugin** - plugin for CRYENGINE V allowing you to play video on the screen and on the game objects
+**CryVideoPlayer** - plugin for CRYENGINE V allowing you to play video on the screen and on the game objects
 
 **It's includes :** 
 * Flowgraph nodes for creating video player (Screen video / Texture video)
@@ -21,7 +21,7 @@
 # Using
 * After compiling plugin go to `bin/win_x64` folder and copy plugin to you project bin folder
 * Also you need copy `avutil-54.dll` and `swscale-3.dll` from `3rd/libav/bin` folder to you project bin folder and also to `CRYENGINE/bin/win_x64` folder
-* Add CryVideoPlugin to you .cryproject file
+* Add CryVideoPlayer to you .cryproject file
 
 ```bash
 {
@@ -32,11 +32,11 @@
 * That's all. Now you can start sandbox and create logic for playing video in you game
 
 # Additional information
-**Warning №1 : CryVideoPlugin uses code of <a href=https://libav.org>Libav</a> licensed under the <a href=https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html>LGPLv2.1</a> and its source and binaries can be downloaded <a href=http://builds.libav.org/windows/>here</a>**
+**Warning №1 : CryVideoPlayer uses code of <a href=https://libav.org>Libav</a> licensed under the <a href=https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html>LGPLv2.1</a> and its source and binaries can be downloaded <a href=http://builds.libav.org/windows/>here</a>**
 
-**Warning №2 : CryVideoPlugin compatible only with CRYENGINE 5.4 now**
+**Warning №2 : CryVideoPlayer compatible only with CRYENGINE 5.4 now**
 
-**Warning №3 : CryVideoPlugin can play video only in .webm format**
+**Warning №3 : CryVideoPlayer can play video only in .webm format**
 
 **Warning №4 : All video files should be in `Videos` folder**
 
@@ -53,15 +53,15 @@
 * Make plugin compatible with CRYENGINE 5.3
 
 # WIKI and lessons
-Please see [CryVideoPlugin WIKI](https://github.com/afrostalin/CryVideoPlugin/wiki)
+Please see [WIKI](https://github.com/afrostalin/CryVideoPlayer/wiki)
 
-Fast study functionality with [VideoPluginExample](https://github.com/afrostalin/VideoPluginExample) project
+Fast study functionality with [example project](https://github.com/afrostalin/VideoPluginExample) project
 
 # GitHub community
 
 I will be happy with any help from the community, so I'm waiting for your pull requests 
 
-If you have any problem with this plugin please use [GitHub issues](https://github.com/afrostalin/CryVideoPlugin/issues) mechanism
+If you have any problem with this plugin please use [GitHub issues](https://github.com/afrostalin/CryVideoPlayer/issues) mechanism
 
 # Contacts
 
