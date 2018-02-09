@@ -1,5 +1,5 @@
 // Copyright (C) 2017-2018 Ilya Chernetsov. All rights reserved. Contacts: <chernecoff@gmail.com>
-// License: https://github.com/afrostalin/CryVideoPlugin/blob/master/LICENSE
+// License: https://github.com/afrostalin/CryVideoPlayer/blob/master/LICENSE
 
 #pragma once
 
@@ -11,7 +11,7 @@ class C2DVideoQueue;
 class CTextureVideoQueue;
 class CInputDispatcher;
 
-#define TITLE "[CryVideoPlugin] "
+#define TITLE "[CryVideoPlayer] "
 
 #define USE_ALIGNED_MEMORY 1
 

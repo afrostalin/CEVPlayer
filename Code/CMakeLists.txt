@@ -3,7 +3,7 @@ set(CRYENGINE_DIR "E:/Program Files/CRYENGINE_5.4")
 set(TOOLS_CMAKE_DIR "${CRYENGINE_DIR}/Tools/CMake")
 
 set(PROJECT_BUILD 1)
-set(PROJECT_DIR "E:/Job/SIA_RUOF/safeguardscode_5.4/Code/CryVideoPlugin")
+set(PROJECT_DIR "E:/Job/BeatGames/CryVideoPlugin")
 
 include("${TOOLS_CMAKE_DIR}/CommonOptions.cmake")
 
@@ -14,7 +14,7 @@ start_sources()
 
 sources_platform(ALL)
 add_sources("Code_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CryVideoPlayer
     SOURCE_GROUP "Root"
 		"Plugin.cpp"
 		"StdAfx.cpp"
@@ -23,7 +23,7 @@ add_sources("Code_uber.cpp"
 		"StdAfx.h"
 )
 add_sources("Audio_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CryVideoPlayer
     SOURCE_GROUP "Audio"
 		"Audio/AudioDecoder.cpp"
 		"Audio/AudioWrapper.cpp"
@@ -31,7 +31,7 @@ add_sources("Audio_uber.cpp"
 		"Audio/AudioWrapper.h"
 )
 add_sources("Core_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CryVideoPlayer
     SOURCE_GROUP "Core"
 		"Core/DecoderThread.cpp"
 		"Core/ThreadManager.cpp"
@@ -41,18 +41,18 @@ add_sources("Core_uber.cpp"
 		"Core/Timer.h"
 )
 add_sources("FlowNodes_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CryVideoPlayer
     SOURCE_GROUP "FlowNodes"
 		"FlowNodes/FlowNodes.cpp"
 )
 add_sources("Input_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CryVideoPlayer
     SOURCE_GROUP "Input"
 		"Input/InputDispatcher.cpp"
 		"Input/InputDispatcher.h"
 )
 add_sources("Render_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CryVideoPlayer
     SOURCE_GROUP "Render"
 		"Render/Frame.cpp"
 		"Render/FrameBuffer.cpp"
@@ -62,13 +62,13 @@ add_sources("Render_uber.cpp"
 		"Render/RenderWrapper.h"
 )
 add_sources("Schematyc_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CryVideoPlayer
     SOURCE_GROUP "Schematyc"
 		"Schematyc/TextureVideoPlayerComponent.cpp"
 		"Schematyc/TextureVideoPlayerComponent.h"
 )
 add_sources("Utils_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CryVideoPlayer
     SOURCE_GROUP "Utils"
 		"Utils/Buffer.h"
 		"Utils/ObjectsPool.h"
@@ -76,7 +76,7 @@ add_sources("Utils_uber.cpp"
 		"Utils/SafeQueue.h"
 )
 add_sources("Video_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CryVideoPlayer
     SOURCE_GROUP "Video"
 		"Video/2DVideoQueue.cpp"
 		"Video/Packet.cpp"
@@ -92,7 +92,7 @@ add_sources("Video_uber.cpp"
 
 end_sources()
 
-CryEngineModule(CryVideoPlugin PCH "StdAfx.cpp" SOLUTION_FOLDER "Project")
+CryEngineModule(CryVideoPlayer PCH "StdAfx.cpp" SOLUTION_FOLDER "Project")
 
 target_include_directories(${THIS_PROJECT}
 PRIVATE 
@@ -107,25 +107,25 @@ PRIVATE
 add_library(GameLauncher STATIC "${CRYENGINE_DIR}/Code/CryEngine/CryCommon/CryCore/Platform/platform.h")
 set_target_properties(GameLauncher PROPERTIES LINKER_LANGUAGE CXX)
 if (WIN32)
-    set_visual_studio_debugger_command(GameLauncher "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"E:/Job/SIA_RUOF/safeguardscode_5.4/Code/CryVideoPlugin/CryVideoPlugin.cryproject\"")
+    set_visual_studio_debugger_command(GameLauncher "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"E:/Job/BeatGames/CryVideoPlugin/CryVideoPlayer.cryproject\"")
 endif()
 
 add_library(Sandbox STATIC "${CRYENGINE_DIR}/Code/CryEngine/CryCommon/CryCore/Platform/platform.h")
 set_target_properties(Sandbox PROPERTIES LINKER_LANGUAGE CXX)
 if (WIN32)
-    set_visual_studio_debugger_command(Sandbox "${CRYENGINE_DIR}/bin/win_x64/Sandbox.exe" "-project \"E:/Job/SIA_RUOF/safeguardscode_5.4/Code/CryVideoPlugin/CryVideoPlugin.cryproject\"")
+    set_visual_studio_debugger_command(Sandbox "${CRYENGINE_DIR}/bin/win_x64/Sandbox.exe" "-project \"E:/Job/BeatGames/CryVideoPlugin/CryVideoPlayer.cryproject\"")
 endif()
 
 add_library(GameServer STATIC "${CRYENGINE_DIR}/Code/CryEngine/CryCommon/CryCore/Platform/platform.h")
 set_target_properties(GameServer PROPERTIES LINKER_LANGUAGE CXX)
 if (WIN32)
-    set_visual_studio_debugger_command(GameServer "${CRYENGINE_DIR}/bin/win_x64/Game_Server.exe" "-project \"E:/Job/SIA_RUOF/safeguardscode_5.4/Code/CryVideoPlugin/CryVideoPlugin.cryproject\"")
+    set_visual_studio_debugger_command(GameServer "${CRYENGINE_DIR}/bin/win_x64/Game_Server.exe" "-project \"E:/Job/BeatGames/CryVideoPlugin/CryVideoPlayer.cryproject\"")
 endif()
 
 set_solution_startup_target(GameLauncher)
 
 if (WIN32)
-    set_visual_studio_debugger_command( ${THIS_PROJECT} "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"E:/Job/SIA_RUOF/safeguardscode_5.4/Code/CryVideoPlugin/CryVideoPlugin.cryproject\"" )
+    set_visual_studio_debugger_command( ${THIS_PROJECT} "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"E:/Job/BeatGames/CryVideoPlugin/CryVideoPlayer.cryproject\"" )
 endif()
 
 #BEGIN-CUSTOM

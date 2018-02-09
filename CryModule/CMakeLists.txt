@@ -80,7 +80,7 @@ add_sources("Video_uber.cpp"
 
 end_sources()
 
-CryEngineModule(CryVideoPlugin PCH "StdAfx.cpp" SOLUTION_FOLDER "CustomPlugins")
+CryEngineModule(CryVideoPlayer PCH "StdAfx.cpp" SOLUTION_FOLDER "CustomPlugins")
 
 target_include_directories(${THIS_PROJECT} 
 	PRIVATE 

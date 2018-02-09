@@ -4,5 +4,5 @@
 #include "StdAfx.h"
 
 // Copyright (C) 2017-2018 Ilya Chernetsov. All rights reserved. Contacts: <chernecoff@gmail.com>
-// License: https://github.com/afrostalin/CryVideoPlugin/blob/master/LICENSE
+// License: https://github.com/afrostalin/CryVideoPlayer/blob/master/LICENSE
 SPluginEnv* mEnv = new SPluginEnv;

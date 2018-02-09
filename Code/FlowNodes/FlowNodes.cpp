@@ -1,5 +1,5 @@
 // Copyright (C) 2017-2018 Ilya Chernetsov. All rights reserved. Contacts: <chernecoff@gmail.com>
-// License: https://github.com/afrostalin/CryVideoPlugin/blob/master/LICENSE
+// License: https://github.com/afrostalin/CryVideoPlayer/blob/master/LICENSE
 
 #include "StdAfx.h"
 #include "PluginEnv.h"
@@ -357,5 +357,5 @@ private:
 	SActivationInfo m_pActInfo;
 };
 
-REGISTER_FLOW_NODE("CryVideoPlugin:2DVideoPlayer", CFlowNode_2DVideoPlayer);
-REGISTER_FLOW_NODE("CryVideoPlugin:TextureVideoPlayer", CFlowNode_TextureVideoPlayer);
+REGISTER_FLOW_NODE("CryVideoPlayer:2DVideoPlayer", CFlowNode_2DVideoPlayer);
+REGISTER_FLOW_NODE("CryVideoPlayer:TextureVideoPlayer", CFlowNode_TextureVideoPlayer);

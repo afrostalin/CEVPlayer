@@ -1,5 +1,5 @@
 // Copyright (C) 2017-2018 Ilya Chernetsov. All rights reserved. Contacts: <chernecoff@gmail.com>
-// License: https://github.com/afrostalin/CryVideoPlugin/blob/master/LICENSE
+// License: https://github.com/afrostalin/CryVideoPlayer/blob/master/LICENSE
 
 #pragma once
 
@@ -17,7 +17,7 @@ public:
 	CRYINTERFACE_ADD(ICryPlugin)
 	CRYINTERFACE_END()
 
-	CRYGENERATE_SINGLETONCLASS_GUID(CVideoPlugin, "CryVideoPlugin", "093DE361-69A6-41FE-9794-068A2234A421"_cry_guid)
+	CRYGENERATE_SINGLETONCLASS_GUID(CVideoPlugin, "CryVideoPlayer", "093DE361-69A6-41FE-9794-068A2234A421"_cry_guid)
 
 	PLUGIN_FLOWNODE_REGISTER;
 	PLUGIN_FLOWNODE_UNREGISTER;
@@ -25,7 +25,7 @@ public:
 	virtual ~CVideoPlugin();
 public:
 	// ICryPlugin
-	const char* GetName() const override { return "CryVideoPlugin"; }
+	const char* GetName() const override { return "CryVideoPlayer"; }
 	const char* GetCategory() const override { return "Render"; }
 	bool        Initialize(SSystemGlobalEnvironment& env, const SSystemInitParams& initParams) override;
 	void        OnPluginUpdate(EPluginUpdateType updateType) override {};
