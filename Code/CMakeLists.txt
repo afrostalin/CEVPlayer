@@ -1,138 +1,96 @@
-cmake_minimum_required (VERSION 3.6.2)
-set(CRYENGINE_DIR "E:/Program Files/CRYENGINE_5.4")
-set(TOOLS_CMAKE_DIR "${CRYENGINE_DIR}/Tools/CMake")
+cmake_minimum_required (VERSION 3.6.0)
+project (CryVideoPlayer VERSION 1.0 LANGUAGES CXX)
+option(OPTION_PCH "Enable Precompiled headers" ON)
+find_package (CryCommon REQUIRED)
+find_package (CryAction REQUIRED)
 
-set(PROJECT_BUILD 1)
-set(PROJECT_DIR "E:/Job/BeatGames/CryVideoPlugin")
-
-include("${TOOLS_CMAKE_DIR}/CommonOptions.cmake")
-
-add_subdirectory("${CRYENGINE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}/CRYENGINE")
-
-include("${TOOLS_CMAKE_DIR}/Configure.cmake")
-start_sources()
-
-sources_platform(ALL)
-add_sources("Code_uber.cpp"
-    PROJECTS CryVideoPlayer
-    SOURCE_GROUP "Root"
-		"Plugin.cpp"
+set (SourceGroup_Root
+	"Plugin.cpp"
 		"StdAfx.cpp"
 		"Plugin.h"
 		"PluginEnv.h"
 		"StdAfx.h"
 )
-add_sources("Audio_uber.cpp"
-    PROJECTS CryVideoPlayer
-    SOURCE_GROUP "Audio"
-		"Audio/AudioDecoder.cpp"
-		"Audio/AudioWrapper.cpp"
-		"Audio/AudioDecoder.h"
-		"Audio/AudioWrapper.h"
-)
-add_sources("Core_uber.cpp"
-    PROJECTS CryVideoPlayer
-    SOURCE_GROUP "Core"
-		"Core/DecoderThread.cpp"
-		"Core/ThreadManager.cpp"
-		"Core/Timer.cpp"
-		"Core/DecoderThread.h"
-		"Core/ThreadManager.h"
-		"Core/Timer.h"
-)
-add_sources("FlowNodes_uber.cpp"
-    PROJECTS CryVideoPlayer
-    SOURCE_GROUP "FlowNodes"
-		"FlowNodes/FlowNodes.cpp"
-)
-add_sources("Input_uber.cpp"
-    PROJECTS CryVideoPlayer
-    SOURCE_GROUP "Input"
-		"Input/InputDispatcher.cpp"
-		"Input/InputDispatcher.h"
-)
-add_sources("Render_uber.cpp"
-    PROJECTS CryVideoPlayer
-    SOURCE_GROUP "Render"
-		"Render/Frame.cpp"
-		"Render/FrameBuffer.cpp"
-		"Render/RenderWrapper.cpp"
-		"Render/Frame.h"
-		"Render/FrameBuffer.h"
-		"Render/RenderWrapper.h"
-)
-add_sources("Schematyc_uber.cpp"
-    PROJECTS CryVideoPlayer
-    SOURCE_GROUP "Schematyc"
-		"Schematyc/TextureVideoPlayerComponent.cpp"
-		"Schematyc/TextureVideoPlayerComponent.h"
-)
-add_sources("Utils_uber.cpp"
-    PROJECTS CryVideoPlayer
-    SOURCE_GROUP "Utils"
-		"Utils/Buffer.h"
-		"Utils/ObjectsPool.h"
-		"Utils/PacketQueue.h"
-		"Utils/SafeQueue.h"
-)
-add_sources("Video_uber.cpp"
-    PROJECTS CryVideoPlayer
-    SOURCE_GROUP "Video"
-		"Video/2DVideoQueue.cpp"
-		"Video/Packet.cpp"
-		"Video/TextureVideoQueue.cpp"
-		"Video/VideoFileReader.cpp"
-		"Video/VideoPlayer.cpp"
-		"Video/2DVideoQueue.h"
-		"Video/Packet.h"
-		"Video/TextureVideoQueue.h"
-		"Video/VideoFileReader.h"
-		"Video/VideoPlayer.h"
+
+set (SourceGroup_Audio
+	"Audio/AudioDecoder.cpp"
+	"Audio/AudioWrapper.cpp"
+	"Audio/AudioDecoder.h"
+	"Audio/AudioWrapper.h"
 )
 
-end_sources()
-
-CryEngineModule(CryVideoPlayer PCH "StdAfx.cpp" SOLUTION_FOLDER "Project")
-
-target_include_directories(${THIS_PROJECT}
-PRIVATE 
-    "${CRYENGINE_DIR}/Code/CryEngine/CryCommon"
-    "${CRYENGINE_DIR}/Code/CryEngine/CryAction"
-	"${CRYENGINE_DIR}/Code/CryEngine/CrySchematyc/Core/Interface"
-	"${CRYENGINE_DIR}/Code/CryPlugins/CryDefaultEntities/Module"
+set (SourceGroup_Core
+	"Core/DecoderThread.cpp"
+	"Core/ThreadManager.cpp"
+	"Core/Timer.cpp"
+	"Core/DecoderThread.h"
+	"Core/ThreadManager.h"
+	"Core/Timer.h"
 )
 
-# Set StartUp project in Visual Studio
+set (SourceGroup_Flownodes
+	"FlowNodes/FlowNodes.cpp"
+)
 
-add_library(GameLauncher STATIC "${CRYENGINE_DIR}/Code/CryEngine/CryCommon/CryCore/Platform/platform.h")
-set_target_properties(GameLauncher PROPERTIES LINKER_LANGUAGE CXX)
-if (WIN32)
-    set_visual_studio_debugger_command(GameLauncher "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"E:/Job/BeatGames/CryVideoPlugin/CryVideoPlayer.cryproject\"")
-endif()
+set (SourceGroup_Input
+	"Input/InputDispatcher.cpp"
+	"Input/InputDispatcher.h"
+)
 
-add_library(Sandbox STATIC "${CRYENGINE_DIR}/Code/CryEngine/CryCommon/CryCore/Platform/platform.h")
-set_target_properties(Sandbox PROPERTIES LINKER_LANGUAGE CXX)
-if (WIN32)
-    set_visual_studio_debugger_command(Sandbox "${CRYENGINE_DIR}/bin/win_x64/Sandbox.exe" "-project \"E:/Job/BeatGames/CryVideoPlugin/CryVideoPlayer.cryproject\"")
-endif()
+set (SourceGroup_Render
+	"Render/Frame.cpp"
+	"Render/FrameBuffer.cpp"
+	"Render/RenderWrapper.cpp"
+	"Render/Frame.h"
+	"Render/FrameBuffer.h"
+	"Render/RenderWrapper.h"
+)
 
-add_library(GameServer STATIC "${CRYENGINE_DIR}/Code/CryEngine/CryCommon/CryCore/Platform/platform.h")
-set_target_properties(GameServer PROPERTIES LINKER_LANGUAGE CXX)
-if (WIN32)
-    set_visual_studio_debugger_command(GameServer "${CRYENGINE_DIR}/bin/win_x64/Game_Server.exe" "-project \"E:/Job/BeatGames/CryVideoPlugin/CryVideoPlayer.cryproject\"")
-endif()
+set (SourceGroup_Utils
+	"Utils/Buffer.h"
+	"Utils/ObjectsPool.h"
+	"Utils/PacketQueue.h"
+	"Utils/SafeQueue.h"
+)
 
-set_solution_startup_target(GameLauncher)
+set (SourceGroup_Video
+	"Video/2DVideoQueue.cpp"
+	"Video/Packet.cpp"
+	"Video/TextureVideoQueue.cpp"
+	"Video/VideoFileReader.cpp"
+	"Video/VideoPlayer.cpp"
+	"Video/2DVideoQueue.h"
+	"Video/Packet.h"
+	"Video/TextureVideoQueue.h"
+	"Video/VideoFileReader.h"
+	"Video/VideoPlayer.h"
+)
 
-if (WIN32)
-    set_visual_studio_debugger_command( ${THIS_PROJECT} "${CRYENGINE_DIR}/bin/win_x64/GameLauncher.exe" "-project \"E:/Job/BeatGames/CryVideoPlugin/CryVideoPlayer.cryproject\"" )
-endif()
+source_group("Main" FILES ${SourceGroup_Root})
+source_group("Audio" FILES ${SourceGroup_Audio})
+source_group("Core" FILES ${SourceGroup_Core})
+source_group("FlowNodes" FILES ${SourceGroup_Flownodes})
+source_group("Input" FILES ${SourceGroup_Input})
+source_group("Render" FILES ${SourceGroup_Render})
+source_group("Utils" FILES ${SourceGroup_Utils})
+source_group("Video" FILES ${SourceGroup_Video})
 
-#BEGIN-CUSTOM
+
+set (SOURCE
+	${SourceGroup_Root}
+	${SourceGroup_Audio}
+	${SourceGroup_Core}
+	${SourceGroup_Flownodes}
+	${SourceGroup_Input}
+	${SourceGroup_Render}
+	${SourceGroup_Utils}
+	${SourceGroup_Video}
+)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug" CACHE STRING "" FORCE) 
 
 add_definitions("/wd4996 /wd4800")
-set_target_properties(${THIS_PROJECT} PROPERTIES LINK_FLAGS "/ignore:4099 /ignore:4075 /ignore:4098")
+set_target_properties(${THIS_PROJECT} PROPERTIES LINK_FLAGS "/ignore:4099 /ignore:4075 /ignore:4098 /ignore:4005")
 
 # Core
 set(CORE_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/../Includes)
@@ -170,20 +128,29 @@ include_directories(
 	${SDL2_INCLUDE} 
 	${LIBAV_INCLUDE})
 
-target_link_libraries(${THIS_PROJECT} PRIVATE 
-	optimized ${LIBWEBM_LIB}/release/libwebm.lib
-	debug ${LIBWEBM_LIB}/debug/libwebm.lib
+if(OPTION_PCH AND MSVC)
+	set (PRECOMPILED_SOURCE ${SOURCE})
+	list(REMOVE_ITEM PRECOMPILED_SOURCE "StdAfx.cpp")
+
+	set (PRECOMPILED_BINARY ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pch)
+	set_source_files_properties (${PRECOMPILED_SOURCE} PROPERTIES COMPILE_FLAGS "/Yu\"StdAfx.h\" /Fp\"${PRECOMPILED_BINARY}\"" OBJECT_DEPENDS "${PRECOMPILED_BINARY}")
+	set_source_files_properties (StdAfx.cpp PROPERTIES COMPILE_FLAGS "/Yc\"StdAfx.h\" /Fp\"${PRECOMPILED_BINARY}\"" OBJECT_OUTPUTS "${PRECOMPILED_BINARY}")
+endif (OPTION_PCH AND MSVC)
+
+add_library(${PROJECT_NAME} MODULE ${SOURCE})
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+	CryCommon
+	CryAction
+	${LIBWEBM_LIB}/debug/libwebm.lib
 	${LIBVPX_LIB}/libvpx.lib
-	optimized ${LIBOGG_LIB}/release/libogg_static.lib
-	debug ${LIBOGG_LIB}/debug/libogg_static.lib
-	optimized ${LIBVORBIS_LIB}/release/libvorbis_static.lib
-	debug ${LIBVORBIS_LIB}/debug/libvorbis_static.lib
-	optimized ${LIBVORBIS_LIB}/release/libvorbisfile_static.lib
-	debug ${LIBVORBIS_LIB}/debug/libvorbisfile_static.lib
+	${LIBOGG_LIB}/debug/libogg_static.lib
+	${LIBVORBIS_LIB}/debug/libvorbis_static.lib
+	${LIBVORBIS_LIB}/debug/libvorbisfile_static.lib
 	${SDL2_LIB}/SDL2main.lib
 	${SDL2_LIB}/SDL2.lib
 	${LIBAV_LIB}/swscale.lib)
 
-set_solution_startup_target(${THIS_PROJECT})
-
-#END-CUSTOM
+if (WIN32)
+	target_link_libraries(${PROJECT_NAME} PRIVATE Ntdll)
+endif(WIN32)

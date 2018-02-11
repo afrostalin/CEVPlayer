@@ -12,8 +12,8 @@ class CTextureVideoQueue;
 class CInputDispatcher;
 
 #define TITLE "[CryVideoPlayer] "
-
 #define USE_ALIGNED_MEMORY 1
+#define CRYENGINE_5_3 (1) //! Change it to 1 if you need build plugin for CRYENGINE 5.3
 
 #define VIDEOS_FOLDER "Videos/"
 #define VEDEO_FORMAT_EXT ".webm"

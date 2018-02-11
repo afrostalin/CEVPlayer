@@ -26,7 +26,11 @@ C2DVideoQueue::C2DVideoQueue()
 
 	if (gEnv->pSystem != nullptr)
 	{
+#if !CRYENGINE_5_3
 		gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this, "C2DVideoQueue_Listener");
+#else
+		gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this);
+#endif
 	}
 
 	m_pRenderWrapper = new CRenderWrapper();

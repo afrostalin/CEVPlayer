@@ -5,14 +5,17 @@
 #include "PluginEnv.h"
 #include "Plugin.h"
 
+#if !CRYENGINE_5_3
 #include <CrySchematyc/Env/IEnvRegistry.h>
 #include <CrySchematyc/Env/EnvPackage.h>
 #include <CrySchematyc/Utils/SharedString.h>
 #include <CrySchematyc/CoreAPI.h>
+#include "Schematyc/TextureVideoPlayerComponent.h"
+#else
+USE_CRYPLUGIN_FLOWNODES
+#endif
 
 #include <CryCore/Platform/platform_impl.inl>
-
-#include "Schematyc/TextureVideoPlayerComponent.h"
 
 #include "Video/2DVideoQueue.h"
 #include "Video/TextureVideoQueue.h"
@@ -100,11 +103,13 @@ CVideoPlugin::~CVideoPlugin()
 		gEnv->pSystem->GetISystemEventDispatcher()->RemoveListener(this);
 	}
 
-#ifndef CRY_IS_MONOLITHIC_BUILD
+#ifndef CRY_IS_MONOLITHIC_BUILD 
+	#if !CRYENGINE_5_3
 	if (gEnv->pSchematyc != nullptr && !gEnv->IsDedicated())
 	{
 		gEnv->pSchematyc->GetEnvRegistry().DeregisterPackage(CVideoPlugin::GetCID());
 	}
+	#endif
 #endif
 
 	UnRegisterCVars();
@@ -124,7 +129,11 @@ bool CVideoPlugin::Initialize(SSystemGlobalEnvironment& env, const SSystemInitPa
 {
 	if (gEnv->pSystem != nullptr && !gEnv->IsDedicated())
 	{
+#if !CRYENGINE_5_3
 		gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this, "CVideoPlugin_Listener");
+#else
+		gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this);
+#endif
 	}
 
 	if (!gEnv->IsDedicated())
@@ -175,6 +184,7 @@ void CVideoPlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR l
 
 		break;
 	}
+#if !CRYENGINE_5_3
 	case ESYSTEM_EVENT_REGISTER_SCHEMATYC_ENV:
 	{
 #ifndef CRY_IS_MONOLITHIC_BUILD 
@@ -198,6 +208,7 @@ void CVideoPlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR l
 #endif
 		break;
 	}
+#endif
 	default:
 		break;
 	}

@@ -7,7 +7,9 @@
 
 #include <CryAudio/IAudioSystem.h>
 #include <CryAudio/IAudioInterfacesCommonData.h>
+#if !CRYENGINE_5_3
 #include <CryAudio/IObject.h>
+#endif
 
 #define NOMINMAX
 #define _CRT_SECURE_NO_WARNINGS
