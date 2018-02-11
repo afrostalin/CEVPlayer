@@ -18,6 +18,10 @@
 * Use CryVideoPlugin.cryproject for generation solution
 * Open solution with Visual Studio and build it
 
+# Branches 
+* `master` - Main branch for latest CRYENGINE version
+* `cryengine_5.3` - If you need build plugin for CRYENGINE 5.3
+
 # Using
 * After compiling plugin go to `bin/win_x64` folder and copy plugin to you project bin folder
 * Also you need copy `avutil-54.dll` and `swscale-3.dll` from `3rd/libav/bin` folder to you project bin folder and also to `CRYENGINE/bin/win_x64` folder
@@ -50,7 +54,7 @@
 * Add ability to play video when level loading (Problem with blocking OnPostUpdate event)
 * Maybe create special shader for YUV->RGBA conversion
 * Audio triggers for in-game video
-* Make plugin compatible with CRYENGINE 5.3
+* ~~Make plugin compatible with CRYENGINE 5.3~~ ([See this](https://github.com/afrostalin/CryVideoPlayer/tree/cryengine_5.3))
 
 # WIKI and lessons
 Please see [WIKI](https://github.com/afrostalin/CryVideoPlayer/wiki)
