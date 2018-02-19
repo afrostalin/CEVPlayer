@@ -1,5 +1,5 @@
 // Copyright (C) 2017-2018 Ilya Chernetsov. All rights reserved. Contacts: <chernecoff@gmail.com>
-// License: https://github.com/afrostalin/CryVideoPlayer/blob/master/LICENSE
+// License: https://github.com/afrostalin/CEVPlayer/blob/master/LICENSE
 
 #pragma once
 
@@ -11,7 +11,7 @@ class C2DVideoQueue;
 class CTextureVideoQueue;
 class CInputDispatcher;
 
-#define TITLE "[CryVideoPlayer] "
+#define TITLE "[CEVPlayer] "
 #define USE_ALIGNED_MEMORY 1
 #define CRYENGINE_5_3 (0) //! Change it to 1 if you need build plugin for CRYENGINE 5.3
 

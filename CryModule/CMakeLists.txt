@@ -2,7 +2,7 @@ start_sources()
 
 sources_platform(ALL)
 add_sources("Code_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CEVPlayer
     SOURCE_GROUP "Root"
 		"../Code/Plugin.cpp"
 		"../Code/StdAfx.cpp"
@@ -11,7 +11,7 @@ add_sources("Code_uber.cpp"
 		"../Code/StdAfx.h"
 )
 add_sources("Audio_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CEVPlayer
     SOURCE_GROUP "Audio"
 		"../Code/Audio/AudioDecoder.cpp"
 		"../Code/Audio/AudioWrapper.cpp"
@@ -19,7 +19,7 @@ add_sources("Audio_uber.cpp"
 		"../Code/Audio/AudioWrapper.h"
 )
 add_sources("Core_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CEVPlayer
     SOURCE_GROUP "Core"
 		"../Code/Core/DecoderThread.cpp"
 		"../Code/Core/ThreadManager.cpp"
@@ -29,18 +29,18 @@ add_sources("Core_uber.cpp"
 		"../Code/Core/Timer.h"
 )
 add_sources("FlowNodes_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CEVPlayer
     SOURCE_GROUP "FlowNodes"
 		"../Code/FlowNodes/FlowNodes.cpp"
 )
 add_sources("Input_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CEVPlayer
     SOURCE_GROUP "Input"
 		"../Code/Input/InputDispatcher.cpp"
 		"../Code/Input/InputDispatcher.h"
 )
 add_sources("Render_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CEVPlayer
     SOURCE_GROUP "Render"
 		"../Code/Render/Frame.cpp"
 		"../Code/Render/FrameBuffer.cpp"
@@ -50,13 +50,13 @@ add_sources("Render_uber.cpp"
 		"../Code/Render/RenderWrapper.h"
 )
 add_sources("Schematyc_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CEVPlayer
     SOURCE_GROUP "Schematyc"
 		"../Code/Schematyc/TextureVideoPlayerComponent.cpp"
 		"../Code/Schematyc/TextureVideoPlayerComponent.h"
 )
 add_sources("Utils_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CEVPlayer
     SOURCE_GROUP "Utils"
 		"../Code/Utils/Buffer.h"
 		"../Code/Utils/ObjectsPool.h"
@@ -64,7 +64,7 @@ add_sources("Utils_uber.cpp"
 		"../Code/Utils/SafeQueue.h"
 )
 add_sources("Video_uber.cpp"
-    PROJECTS CryVideoPlugin
+    PROJECTS CEVPlayer
     SOURCE_GROUP "Video"
 		"../Code/Video/2DVideoQueue.cpp"
 		"../Code/Video/Packet.cpp"
@@ -80,7 +80,7 @@ add_sources("Video_uber.cpp"
 
 end_sources()
 
-CryEngineModule(CryVideoPlayer PCH "StdAfx.cpp" SOLUTION_FOLDER "CustomPlugins")
+CryEngineModule(CEVPlayer PCH "StdAfx.cpp" SOLUTION_FOLDER "CustomPlugins")
 
 target_include_directories(${THIS_PROJECT} 
 	PRIVATE 
