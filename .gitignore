@@ -1,6 +1,8 @@
 # Temporary directories.
 /solutions/*
 /bin/*
+/_MarketPlace/*
+/_Example/*
 
 # 3rd projects
 /3rd/libvpx/*
