@@ -134,14 +134,14 @@ public:
 			}
 			else if (IsPortActive(pActInfo, eIP_Resume))
 			{
-				if (mEnv != nullptr || mEnv->pVideoQueue != nullptr)
+				if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
 				{
 					mEnv->pVideoQueue->Resume2DVideo();
 				}
 			}
 			else if (IsPortActive(pActInfo, eIP_Stop))
 			{
-				if (mEnv != nullptr || mEnv->pVideoQueue != nullptr)
+				if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
 				{
 					mEnv->pVideoQueue->Stop2DVideo();
 				}
