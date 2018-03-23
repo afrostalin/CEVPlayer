@@ -358,6 +358,8 @@ private:
 	SActivationInfo m_pActInfo;
 };
 
+// This flow node created with community support. Personaly thanks @nicalmacha
+// Forum thread : https://forum.cryengine.com/viewtopic.php?f=21&t=7524&p=16429#p16429
 class CFlowNode_FlashVideoPlayer 
 	: public CFlowBaseNode<eNCT_Instanced>
 	, public IVideoPlayerEventListener
