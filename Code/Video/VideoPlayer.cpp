@@ -344,7 +344,8 @@ bool CVideoPlayer::update()
 				}
 				else
 				{
-					m_state = SVideoPlayerState::NeedRestart;
+					m_state = SVideoPlayerState::Restarting;
+					restart();
 				}
 
 				callOnFinishEvent = true;
@@ -475,6 +476,36 @@ void  CVideoPlayer::stop()
 	}
 }
 
+void CVideoPlayer::restart()
+{
+	Log("<CVideoPlayer> Restart video <%s>...", m_reader->GetFileName().c_str());
+
+	// Reset all
+	if (m_audioDecoder)
+	{	
+		m_audioDecoder->resetDecode();		
+	}
+
+	m_framesDecoded = 0;
+
+	m_videoQueue.destroy();
+	m_audioQueue.destroy();
+
+	if (m_frameBuffer)
+	{
+		m_frameBuffer->reset();
+	}
+
+	m_blockEntry = nullptr;
+	m_cluster = nullptr;
+
+	m_timer.stop();
+
+	// Restart it
+	m_cluster = m_segment->GetFirst();
+	m_state = SVideoPlayerState::Buffering;
+}
+
 const char * CVideoPlayer::getStateStr()
 {
 	const char* str = nullptr;
@@ -493,8 +524,8 @@ const char * CVideoPlayer::getStateStr()
 		str = "Stopped";
 	else if (m_state == SVideoPlayerState::Finished)
 		str = "Finished";
-	else if (m_state == SVideoPlayerState::NeedRestart)
-		str = "NeedRestart";
+	else if (m_state == SVideoPlayerState::Restarting)
+		str = "Restarting";
 
 	return str;
 }

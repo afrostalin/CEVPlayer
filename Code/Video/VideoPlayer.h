@@ -48,7 +48,7 @@ enum class SVideoPlayerState
 	Paused,
 	Stopped,
 	Finished,
-	NeedRestart
+	Restarting
 };
 
 enum class SVideoPlayerResult
@@ -110,13 +110,14 @@ public:
 	void                           play();
 	void                           pause();
 	void                           stop();
+	void                           restart(); // Used for restart video when it looped
 
 	bool                           isStopped() { return m_state == SVideoPlayerState::Stopped; }
 	bool                           isPaused() { return m_state == SVideoPlayerState::Paused; }
 	bool                           isPlaying() { return m_state == SVideoPlayerState::Playing; }
 	bool                           isBuffering() { return m_state == SVideoPlayerState::Buffering; }
 	bool                           isFinished() { return m_state == SVideoPlayerState::Finished; }
-	bool                           isNeedRestart() { return m_state == SVideoPlayerState::NeedRestart; }
+	bool                           isRestarting() { return m_state == SVideoPlayerState::Restarting; }
 
 	bool                           isSkippable() const { return m_isSkippable; }
 	bool                           isCanBePaused() const { return m_canBePaused; }

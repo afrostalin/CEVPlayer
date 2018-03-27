@@ -83,10 +83,6 @@ void C2DVideoQueue::OnPostUpdate(float fDeltaTime)
 	{
 		Stop2DVideo();
 	}
-	else if (m_p2DVideoPlayer != nullptr && m_p2DVideoPlayer->isNeedRestart())
-	{
-		Restart2DVideo();
-	}
 
 	Draw2DVideo(fDeltaTime);
 
@@ -233,19 +229,6 @@ void C2DVideoQueue::Stop2DVideo()
 		{
 			LogError("Can't stop 2D video because no video in queue or video alredy stopped");
 		}
-	}
-}
-
-void C2DVideoQueue::Restart2DVideo()
-{
-	if (m_p2DVideoPlayer != nullptr && m_p2DVideoPlayer->isNeedRestart())
-	{
-		m_p2DVideoPlayer->stop();
-		m_p2DVideoPlayer->play();
-	}
-	else
-	{
-		LogError("Can't restart 2D video because no video in queue or video not need restart");
 	}
 }
 
