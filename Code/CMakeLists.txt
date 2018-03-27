@@ -1,5 +1,5 @@
 #BEGIN-CUSTOM
-set(CMAKE_CONFIGURATION_TYPES "Debug" CACHE STRING "" FORCE) 
+set(CMAKE_CONFIGURATION_TYPES "Profile" CACHE STRING "" FORCE) 
 
 add_definitions("/wd4996 /wd4800")
 set_target_properties(${THIS_PROJECT} PROPERTIES LINK_FLAGS "/ignore:4099 /ignore:4075 /ignore:4098")
@@ -41,15 +41,11 @@ include_directories(
 	${LIBAV_INCLUDE})
 
 target_link_libraries(${THIS_PROJECT} PRIVATE 
-	optimized ${LIBWEBM_LIB}/release/libwebm.lib
-	debug ${LIBWEBM_LIB}/debug/libwebm.lib
+	${LIBWEBM_LIB}/release/libwebm.lib
 	${LIBVPX_LIB}/libvpx.lib
-	optimized ${LIBOGG_LIB}/release/libogg_static.lib
-	debug ${LIBOGG_LIB}/debug/libogg_static.lib
-	optimized ${LIBVORBIS_LIB}/release/libvorbis_static.lib
-	debug ${LIBVORBIS_LIB}/debug/libvorbis_static.lib
-	optimized ${LIBVORBIS_LIB}/release/libvorbisfile_static.lib
-	debug ${LIBVORBIS_LIB}/debug/libvorbisfile_static.lib
+	${LIBOGG_LIB}/release/libogg_static.lib
+	${LIBVORBIS_LIB}/release/libvorbis_static.lib
+	${LIBVORBIS_LIB}/release/libvorbisfile_static.lib
 	${SDL2_LIB}/SDL2main.lib
 	${SDL2_LIB}/SDL2.lib
 	${LIBAV_LIB}/swscale.lib)
