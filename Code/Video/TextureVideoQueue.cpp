@@ -21,7 +21,7 @@ CTextureVideoQueue::CTextureVideoQueue()
 
 	if (gEnv->pSystem != nullptr)
 	{
-#if !CRYENGINE_5_3
+#if CRY_VERSION != 53
 		gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this, "CTextureVideoQueue_Listener");
 #else
 		gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this);

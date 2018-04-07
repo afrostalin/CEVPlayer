@@ -7,7 +7,7 @@
 
 #include <CryAudio/IAudioSystem.h>
 #include <CryAudio/IAudioInterfacesCommonData.h>
-#if !CRYENGINE_5_3
+#if CRY_VERSION != 53
 #include <CryAudio/IObject.h>
 #endif
 

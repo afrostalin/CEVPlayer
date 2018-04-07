@@ -23,7 +23,11 @@ void CRenderWrapper::Create2DVideoTextures()
 	const int screenWidth = gEnv->pRenderer->GetOverlayWidth();
 	const int screenHeight = gEnv->pRenderer->GetOverlayHeight();
 
+#if CRY_VERSION == 53 || CRY_VERSION == 54
 	m_2DTextureID = gEnv->pRenderer->DownLoadToVideoMemory(nullptr, screenWidth, screenHeight, eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, VIDEO_PLAYER_2D_TEXTURE, FT_NOMIPS);
+#elif CRY_VERSION == 55
+	m_2DTextureID = gEnv->pRenderer->UploadToVideoMemory(nullptr, screenWidth, screenHeight, eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, VIDEO_PLAYER_2D_TEXTURE, FT_NOMIPS);
+#endif
 
 	LogDebug("<CRenderWrapper> Create 2D texture with name <" VIDEO_PLAYER_2D_TEXTURE "> id <%d>", m_2DTextureID);
 }
@@ -43,7 +47,11 @@ double CRenderWrapper::RenderFrameToMainWindow(CVideoFrame* pFrame)
 
 	if (m_2DTextureID == 0)
 	{
+#if CRY_VERSION == 53 || CRY_VERSION == 54
 		m_2DTextureID = gEnv->pRenderer->DownLoadToVideoMemory(nullptr, pFrame->displayWidth(), pFrame->displayHeight(), eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, VIDEO_PLAYER_2D_TEXTURE, FT_NOMIPS);
+#elif CRY_VERSION == 55
+		m_2DTextureID = gEnv->pRenderer->UploadToVideoMemory(nullptr, pFrame->displayWidth(), pFrame->displayHeight(), eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, VIDEO_PLAYER_2D_TEXTURE, FT_NOMIPS);
+#endif
 		LogDebug("<CRenderWrapper> Create 2D texture with name <" VIDEO_PLAYER_2D_TEXTURE "> id <%d>", m_2DTextureID);
 	}
 
@@ -83,7 +91,11 @@ void CRenderWrapper::Release2DVideoTextures()
 
 int CRenderWrapper::CreateTextureForTextureVideo(int width, int height, const char* name)
 {
+#if CRY_VERSION == 53 || CRY_VERSION == 54
 	int textureID = gEnv->pRenderer->DownLoadToVideoMemory(nullptr, width, height, eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, name, FT_NOMIPS);
+#elif CRY_VERSION == 55
+	int textureID = gEnv->pRenderer->UploadToVideoMemory(nullptr, width, height, eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, name, FT_NOMIPS);
+#endif
 	LogDebug("<CRenderWrapper> Create texture with id <%d> and name <%s>", textureID, name);
 	return textureID;
 }
@@ -121,7 +133,11 @@ void CRenderWrapper::Draw2dImage(ITexture * pTex)
 			const float finishWidth = w * vx;
 			const float finishHeight = h * vy;
 
+#if CRY_VERSION == 53 || CRY_VERSION == 54
 			gEnv->pRenderer->Draw2dImage(0, 0, finishWidth, finishHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
+#elif CRY_VERSION == 55
+			IRenderAuxImage::Draw2dImage(0, 0, finishWidth, finishHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
+#endif
 		}
 	}
 }

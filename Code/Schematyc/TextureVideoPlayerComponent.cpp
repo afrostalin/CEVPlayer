@@ -124,7 +124,11 @@ uint64 CTextureVideoPlayerComponent::GetEventMask() const
 	return ENTITY_EVENT_BIT(ENTITY_EVENT_START_GAME);
 }
 
+#if CRY_VERSION == 53 || CRY_VERSION == 54
 void CTextureVideoPlayerComponent::ProcessEvent(SEntityEvent & event)
+#elif CRY_VERSION == 55
+void CTextureVideoPlayerComponent::ProcessEvent(const SEntityEvent & event)
+#endif
 {
 	switch (event.event)
 	{

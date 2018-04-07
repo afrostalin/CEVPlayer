@@ -5,7 +5,7 @@
 #include "PluginEnv.h"
 #include "Plugin.h"
 
-#if !CRYENGINE_5_3
+#if CRY_VERSION != 53
 #include <CrySchematyc/Env/IEnvRegistry.h>
 #include <CrySchematyc/Env/EnvPackage.h>
 #include <CrySchematyc/Utils/SharedString.h>
@@ -104,7 +104,7 @@ CVideoPlugin::~CVideoPlugin()
 	}
 
 #ifndef CRY_IS_MONOLITHIC_BUILD 
-	#if !CRYENGINE_5_3
+    #if CRY_VERSION != 53
 	if (gEnv->pSchematyc != nullptr && !gEnv->IsDedicated())
 	{
 		gEnv->pSchematyc->GetEnvRegistry().DeregisterPackage(CVideoPlugin::GetCID());
@@ -129,7 +129,7 @@ bool CVideoPlugin::Initialize(SSystemGlobalEnvironment& env, const SSystemInitPa
 {
 	if (gEnv->pSystem != nullptr && !gEnv->IsDedicated())
 	{
-#if !CRYENGINE_5_3
+#if CRY_VERSION != 53
 		gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this, "CVideoPlugin_Listener");
 #else
 		gEnv->pSystem->GetISystemEventDispatcher()->RegisterListener(this);
@@ -184,7 +184,7 @@ void CVideoPlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR l
 
 		break;
 	}
-#if !CRYENGINE_5_3
+#if CRY_VERSION != 53
 	case ESYSTEM_EVENT_REGISTER_SCHEMATYC_ENV:
 	{
 #ifndef CRY_IS_MONOLITHIC_BUILD 
