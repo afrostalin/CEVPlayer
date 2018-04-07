@@ -1,6 +1,6 @@
 
 # Short description
-**CryVideoPlayer** - plugin for CRYENGINE V allowing you to play video on the screen and on the game objects
+**CEVPlayer** - plugin for CRYENGINE V allowing you to play video on the screen and on the game objects
 
 **It's includes :** 
 * Flowgraph nodes for creating video player (Screen video / Texture video)
@@ -15,45 +15,47 @@
 * Go to 3rd folder and unpack `3rd.7z` archive
 * Also you need installed CRYENGINE V
 ## Compiling
-* Use CryVideoPlugin.cryproject for generation solution
+* Use CEVPlayer.cryproject for generation solution
 * Open solution with Visual Studio and build it
+
+# Branches 
+* `master` - Main branch for latest CRYENGINE version
+* `cryengine_5.3` - If you need build plugin for CRYENGINE 5.3
 
 # Using
 * After compiling plugin go to `bin/win_x64` folder and copy plugin to you project bin folder
 * Also you need copy `avutil-54.dll` and `swscale-3.dll` from `3rd/libav/bin` folder to you project bin folder and also to `CRYENGINE/bin/win_x64` folder
-* Add CryVideoPlayer to you .cryproject file
+* Add CEVPlayer to you .cryproject file
 
 ```bash
 {
     "type": "EPluginType::Native",
-    "path": "bin/win_x64/CryVideoPlugin.dll"
+    "path": "bin/win_x64/CEVPlayer.dll"
 }
 ```
 * That's all. Now you can start sandbox and create logic for playing video in you game
 
 # Additional information
-**Warning №1 : CryVideoPlayer uses code of <a href=https://libav.org>Libav</a> licensed under the <a href=https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html>LGPLv2.1</a> and its source and binaries can be downloaded <a href=http://builds.libav.org/windows/>here</a>**
+**Warning №1 : CEVPlayer uses code of <a href=https://libav.org>Libav</a> licensed under the <a href=https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html>LGPLv2.1</a> and its source and binaries can be downloaded <a href=http://builds.libav.org/windows/>here</a>**
 
-**Warning №2 : CryVideoPlayer compatible only with CRYENGINE 5.4 now**
+**Warning №2 : CEVPlayer can play video only in .webm format**
 
-**Warning №3 : CryVideoPlayer can play video only in .webm format**
+**Warning №3 : All video files should be in `Videos` folder**
 
-**Warning №4 : All video files should be in `Videos` folder**
+**Warning №4 : TextureVideoPlayer not playing audio - use audio triggers for this**
 
-**Warning №5 : TextureVideoPlayer not playing audio - use audio triggers for this**
+**Warning №5 : Don't use for TextureVideoPlayer video in very hight resolution - it's can be perfomance problems (optimal HD and low)**
 
-**Warning №6 : Don't use for TextureVideoPlayer video in very hight resolution - it's can be perfomance problems (optimal HD and low)**
-
-**Warning №7 : Don't play video when level loading - you game will be crash!**
+**Warning №6 : Don't play video when level loading - you game will be crash!**
 
 # TODO
 * Add ability to play video when level loading (Problem with blocking OnPostUpdate event)
 * Maybe create special shader for YUV->RGBA conversion
 * Audio triggers for in-game video
-* Make plugin compatible with CRYENGINE 5.3
+* ~~Make plugin compatible with CRYENGINE 5.3~~ ([See this](https://github.com/afrostalin/CEVPlayer/tree/cryengine_5.3))
 
 # WIKI and lessons
-Please see [WIKI](https://github.com/afrostalin/CryVideoPlayer/wiki)
+Please see [WIKI](https://github.com/afrostalin/CEVPlayer/wiki)
 
 Fast study functionality with [example project](https://github.com/afrostalin/VideoPluginExample) project
 
@@ -61,7 +63,7 @@ Fast study functionality with [example project](https://github.com/afrostalin/Vi
 
 I will be happy with any help from the community, so I'm waiting for your pull requests 
 
-If you have any problem with this plugin please use [GitHub issues](https://github.com/afrostalin/CryVideoPlayer/issues) mechanism
+If you have any problem with this plugin please use [GitHub issues](https://github.com/afrostalin/CEVPlayer/issues) mechanism
 
 # Contacts
 

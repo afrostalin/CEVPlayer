@@ -1,5 +1,5 @@
 // Copyright (C) 2017-2018 Ilya Chernetsov. All rights reserved. Contacts: <chernecoff@gmail.com>
-// License: https://github.com/afrostalin/CryVideoPlayer/blob/master/LICENSE
+// License: https://github.com/afrostalin/CEVPlayer/blob/master/LICENSE
 
 #pragma once
 
@@ -39,7 +39,6 @@ public:
 	void              Pause2DVideo();
 	void              Resume2DVideo();
 	void              Stop2DVideo();
-	void              Restart2DVideo();
 	bool              Is2DVideoPlayingNow();
 public: 
 	void              OnActionPause2DVideo(EInputState activationMode, float value);

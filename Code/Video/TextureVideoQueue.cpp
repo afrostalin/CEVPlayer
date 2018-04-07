@@ -1,5 +1,5 @@
 // Copyright (C) 2017-2018 Ilya Chernetsov. All rights reserved. Contacts: <chernecoff@gmail.com>
-// License: https://github.com/afrostalin/CryVideoPlayer/blob/master/LICENSE
+// License: https://github.com/afrostalin/CEVPlayer/blob/master/LICENSE
 
 #include "StdAfx.h"
 #include "PluginEnv.h"
@@ -78,53 +78,46 @@ void CTextureVideoQueue::OnPostUpdate(float fDeltaTime)
 
 	for (auto &it : m_Videos)
 	{
-		if (it.pVideoPlayer != nullptr && it.pVideoPlayer->isFinished())
+		if (it.pVideoPlayer)
 		{
-			it.pVideoPlayer->stop();
-			it.m_bMarkForDelete = true;
-
-			if (it.m_stopTextureName.empty())
+			// If video finished - stop it and mark for delete
+			if (it.pVideoPlayer->isFinished())
 			{
-				CVideoFrame stopFrame(it.pVideoPlayer->info().width, it.pVideoPlayer->info().height);
-				m_pRenderWrapper->UpdateTextureForTextureVideo(&stopFrame, it.m_textureID);
-			}
-			else
-			{
-				// TODO
-				//ITexture* pTexture = gEnv->pRenderer->EF_LoadTexture(it.m_stopTextureName.c_str(), 0);
-				//if (pTexture != nullptr)
-				//{
-				//	CVideoFrame stopFrame(it.pVideoPlayer->info().width, it.pVideoPlayer->info().height);
-				//	pTexture->GetData32(0, 0, stopFrame.rgba());
-				//	m_pRenderWrapper->UpdateTextureForTextureVideo(&stopFrame, it.m_textureID);
-				//}
-			}
+				it.pVideoPlayer->stop();
+				it.m_bMarkForDelete = true;
 
-			continue;
-		}
-		else if (it.pVideoPlayer != nullptr && it.pVideoPlayer->isNeedRestart())
-		{
-			it.pVideoPlayer->stop();
-			it.pVideoPlayer->play();
-			continue;
-		}
-
-		if (it.pVideoPlayer != nullptr)
-		{
-			CVideoFrame* pFrame = it.pVideoPlayer->frameBuffer()->lockRead();
-
-			if (pFrame != nullptr)
-			{
-				if (!it.pVideoPlayer->isPaused())
+				if (it.m_stopTextureName.empty())
 				{
-					if (pFrame->isValid() && it.m_textureID)
-					{
-						m_pRenderWrapper->UpdateTextureForTextureVideo(pFrame, it.m_textureID);
-					}
-				}			
+					CVideoFrame stopFrame(it.pVideoPlayer->info().width, it.pVideoPlayer->info().height);
+					m_pRenderWrapper->UpdateTextureForTextureVideo(&stopFrame, it.m_textureID);
+				}
+				else
+				{
+					// TODO
+				}
+
+				continue;
 			}
 
-			it.pVideoPlayer->frameBuffer()->unlockRead();
+			// Update texture in memory
+			{
+				CVideoFrame* pFrame = it.pVideoPlayer->frameBuffer()->lockRead();
+
+				if (pFrame != nullptr)
+				{
+					if (!it.pVideoPlayer->isPaused())
+					{
+						if (pFrame->isValid() && it.m_textureID)
+						{
+							m_pRenderWrapper->UpdateTextureForTextureVideo(pFrame, it.m_textureID);
+						}
+					}
+				}
+
+				it.pVideoPlayer->frameBuffer()->unlockRead();
+			}
+
+			// Update video player
 			it.pVideoPlayer->update();
 		}
 	}
