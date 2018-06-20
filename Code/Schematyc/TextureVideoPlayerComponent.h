@@ -26,7 +26,11 @@ public:
 	virtual void   Initialize() override;
 	virtual void   OnShutDown() override;
 	virtual uint64 GetEventMask() const override;
+#if CRY_VERSION == 53 || CRY_VERSION == 54
 	virtual void   ProcessEvent(SEntityEvent& event) override;
+#elif CRY_VERSION == 55
+	virtual void   ProcessEvent(const SEntityEvent& event) override;
+#endif
 	// ~IEntityComponent
 public:
 	struct SOnStartPlaySignal

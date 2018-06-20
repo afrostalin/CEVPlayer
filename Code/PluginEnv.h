@@ -13,11 +13,12 @@ class CInputDispatcher;
 
 #define TITLE "[CEVPlayer] "
 #define USE_ALIGNED_MEMORY 1
-#define CRYENGINE_5_3 (1) //! Change it to 1 if you need build plugin for CRYENGINE 5.3
+#define CRY_VERSION 55 // Setup CRYENGINE version 53, 54, 55
 
-#define VIDEOS_FOLDER "Videos/"
+#define VIDEO_FOLDER "Videos/"
 #define VEDEO_FORMAT_EXT ".webm"
 
+#define SAFE_RELEASE_11(p) { if (p != nullptr) { (p)->Release(); delete p; p = nullptr; } }
 #define SAFE_DELETE_11(p) { if (p != nullptr) { delete p; p = nullptr; } }
 #define SAFE_DELETE_ARRAY_11(p) { if (p != nullptr) { delete[] p; p = nullptr; } }
 

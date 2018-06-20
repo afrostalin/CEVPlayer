@@ -6,9 +6,15 @@
 #include <CrySystem/ICryPlugin.h>
 #include "IVideoPluginListeners.h"
 
-struct IVideoPlugin : public ICryPlugin
+
+struct IVideoPlugin 
+#if CRY_VERSION == 53 || CRY_VERSION == 54
+	: public ICryPlugin
+#elif CRY_VERSION == 55
+	: public Cry::IEnginePlugin
+#endif
 {
-#if !CRYENGINE_5_3
+#if CRY_VERSION != 53
 	CRYINTERFACE_DECLARE_GUID(IVideoPlugin, "AAB3D63C-77A4-482A-8D25-3E362B906321"_cry_guid);
 #else
 	CRYINTERFACE_DECLARE(IVideoPlugin, 0xAAB3D63C77A4482A, 0x8D253E362B906321);

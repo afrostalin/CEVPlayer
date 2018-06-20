@@ -58,7 +58,7 @@ SVideoPlayerResult CVideoPlayer::load(const char *fileName, bool preloaded, bool
 	reset();
 
 	string videoFileName;
-	videoFileName.Format(VIDEOS_FOLDER "%s" VEDEO_FORMAT_EXT, fileName);
+	videoFileName.Format(VIDEO_FOLDER "%s" VEDEO_FORMAT_EXT, fileName);
 
 
 	int maj, min, build, rev;

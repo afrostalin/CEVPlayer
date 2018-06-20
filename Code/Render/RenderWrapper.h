@@ -8,7 +8,7 @@ class CVideoFrame;
 class CRenderWrapper
 {
 public:
-	CRenderWrapper();
+	CRenderWrapper() {};
 	~CRenderWrapper();
 public:
 	void         Create2DVideoTextures();
@@ -20,5 +20,5 @@ public:
 private:
 	void         Draw2dImage(ITexture* pTex);
 private:
-	int          m_2DTextureID;
+	int          m_2DTextureID = 0;
 };

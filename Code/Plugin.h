@@ -14,10 +14,14 @@ class CVideoPlugin
 public:
 	CRYINTERFACE_BEGIN()
 	CRYINTERFACE_ADD(IVideoPlugin)
+#if CRY_VERSION == 53 || CRY_VERSION == 54
 	CRYINTERFACE_ADD(ICryPlugin)
+#elif CRY_VERSION == 55
+	CRYINTERFACE_ADD(Cry::IEnginePlugin)
+#endif
 	CRYINTERFACE_END()
 
-#if !CRYENGINE_5_3
+#if CRY_VERSION != 53
 	CRYGENERATE_SINGLETONCLASS_GUID(CVideoPlugin, "CEVPlayer", "093DE361-69A6-41FE-9794-068A2234A421"_cry_guid)
 #else
 	CRYGENERATE_SINGLETONCLASS(CVideoPlugin, "CEVPlayer", 0x093DE36169A641FE, 0x9794068A2234A421);
@@ -32,7 +36,9 @@ public:
 	const char* GetName() const override { return "CEVPlayer"; }
 	const char* GetCategory() const override { return "Render"; }
 	bool        Initialize(SSystemGlobalEnvironment& env, const SSystemInitParams& initParams) override;
+#if CRY_VERSION == 53 || CRY_VERSION == 54
 	void        OnPluginUpdate(EPluginUpdateType updateType) override {};
+#endif
 	// ~ICryPlugin
 
 	// ISystemEventListener
