@@ -127,8 +127,25 @@ void CRenderWrapper::Draw2dImage(ITexture * pTex)
 
 		if (textWidth > 0 && textHeight > 0 && screenWidth > 0 && screenHeight > 0)
 		{
-			// Draw 2D image to fullscreen window
-#if CRY_VERSION == 53 || CRY_VERSION == 54
+#if CRY_VERSION == 53
+			const float scaleX = (float)screenWidth / (float)textWidth;
+			const float scaleY = (float)screenHeight / (float)textHeight;
+			
+			const float scale = (scaleY * textWidth > screenWidth) ? scaleX : scaleY;
+			
+			const float w = textWidth * scale;
+			const float h = textHeight * scale;
+			const float x = (screenWidth - w) * 0.5f;
+			const float y = (screenHeight - h) * 0.5f;
+			
+			const float vx = (800.0f / (float)screenWidth);
+			const float vy = (600.0f / (float)screenHeight);
+			
+			const float finishWidth = w * vx;
+			const float finishHeight = h * vy;
+
+			gEnv->pRenderer->Draw2dImage(0, 0, finishWidth, finishHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
+#elif CRY_VERSION == 54
 			gEnv->pRenderer->Draw2dImage(0, 0, screenWidth, screenHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
 #elif CRY_VERSION == 55
 			IRenderAuxImage::Draw2dImage(0, 0, screenWidth, screenHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
