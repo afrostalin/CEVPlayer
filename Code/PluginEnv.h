@@ -13,7 +13,7 @@ class CInputDispatcher;
 
 #define TITLE "[CEVPlayer] "
 #define USE_ALIGNED_MEMORY 1
-#define CRY_VERSION 54 // Setup CRYENGINE version 53, 54, 55
+#define CRY_VERSION 55 // Setup CRYENGINE version 53, 54, 55
 
 #define VIDEO_FOLDER "Videos/"
 #define VEDEO_FORMAT_EXT ".webm"
