@@ -15,9 +15,10 @@ class CInputDispatcher;
 #define USE_ALIGNED_MEMORY 1
 #define CRY_VERSION 54 // Setup CRYENGINE version 53, 54, 55
 
-#define VIDEOS_FOLDER "Videos/"
+#define VIDEO_FOLDER "Videos/"
 #define VEDEO_FORMAT_EXT ".webm"
 
+#define SAFE_RELEASE_11(p) { if (p != nullptr) { (p)->Release(); delete p; p = nullptr; } }
 #define SAFE_DELETE_11(p) { if (p != nullptr) { delete p; p = nullptr; } }
 #define SAFE_DELETE_ARRAY_11(p) { if (p != nullptr) { delete[] p; p = nullptr; } }
 

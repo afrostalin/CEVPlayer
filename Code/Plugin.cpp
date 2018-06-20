@@ -114,13 +114,10 @@ CVideoPlugin::~CVideoPlugin()
 
 	UnRegisterCVars();
 
-	mEnv->pThreadManager->Release();
-	mEnv->pVideoQueue->Release();
-	mEnv->pTextureVideoQueue->Release();
+	SAFE_RELEASE_11(mEnv->pThreadManager);
+	SAFE_RELEASE_11(mEnv->pVideoQueue);
+	SAFE_RELEASE_11(mEnv->pTextureVideoQueue);
 
-	SAFE_DELETE_11(mEnv->pThreadManager);
-	SAFE_DELETE_11(mEnv->pVideoQueue);
-	SAFE_DELETE_11(mEnv->pTextureVideoQueue);
 	SAFE_DELETE_11(mEnv->pInputDispatcher);
 	SAFE_DELETE_11(mEnv);
 }
