@@ -8,11 +8,6 @@
 
 #define VIDEO_PLAYER_2D_TEXTURE "$video_player_2D"
 
-CRenderWrapper::CRenderWrapper()
-	: m_2DTextureID(0)
-{
-}
-
 CRenderWrapper::~CRenderWrapper()
 {
 	Release2DVideoTextures();
@@ -20,6 +15,12 @@ CRenderWrapper::~CRenderWrapper()
 
 void CRenderWrapper::Create2DVideoTextures()
 {
+	if (gEnv->pRenderer == nullptr)
+	{
+		LogError("<CRenderWrapper> Can't create 2D video texture - render nullptr");
+		return;
+	}
+
 	const int screenWidth = gEnv->pRenderer->GetOverlayWidth();
 	const int screenHeight = gEnv->pRenderer->GetOverlayHeight();
 
@@ -81,7 +82,7 @@ double CRenderWrapper::RenderFrameToMainWindow(CVideoFrame* pFrame)
 
 void CRenderWrapper::Release2DVideoTextures()
 {
-	if (m_2DTextureID)
+	if (m_2DTextureID && gEnv->pRenderer != nullptr)
 	{
 		LogDebug("<CRenderWrapper> Remove 2D texture with id <%d>", m_2DTextureID);
 		gEnv->pRenderer->RemoveTexture(m_2DTextureID);
@@ -91,6 +92,12 @@ void CRenderWrapper::Release2DVideoTextures()
 
 int CRenderWrapper::CreateTextureForTextureVideo(int width, int height, const char* name)
 {
+	if (gEnv->pRenderer == nullptr)
+	{
+		LogError("<CRenderWrapper> Can't create texture for texture video - render nullptr");
+		return 0;
+	}
+
 #if CRY_VERSION == 53 || CRY_VERSION == 54
 	int textureID = gEnv->pRenderer->DownLoadToVideoMemory(nullptr, width, height, eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, name, FT_NOMIPS);
 #elif CRY_VERSION == 55
@@ -102,12 +109,15 @@ int CRenderWrapper::CreateTextureForTextureVideo(int width, int height, const ch
 
 void CRenderWrapper::UpdateTextureForTextureVideo(CVideoFrame * pFrame, int textureID)
 {
-	gEnv->pRenderer->UpdateTextureInVideoMemory(textureID, pFrame->rgba(), 0, 0, pFrame->displayWidth(), pFrame->displayHeight(), eTF_R8G8B8A8);
+	if (gEnv->pRenderer != nullptr)
+	{
+		gEnv->pRenderer->UpdateTextureInVideoMemory(textureID, pFrame->rgba(), 0, 0, pFrame->displayWidth(), pFrame->displayHeight(), eTF_R8G8B8A8);
+	}
 }
 
 void CRenderWrapper::Draw2dImage(ITexture * pTex)
 {
-	if (pTex != nullptr)
+	if (pTex != nullptr && gEnv->pRenderer != nullptr)
 	{
 		const int textWidth = pTex->GetWidth();
 		const int texthHeight = pTex->GetHeight();
