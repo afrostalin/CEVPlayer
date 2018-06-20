@@ -30,7 +30,7 @@ void CRenderWrapper::Create2DVideoTextures()
 	m_2DTextureID = gEnv->pRenderer->UploadToVideoMemory(nullptr, screenWidth, screenHeight, eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, VIDEO_PLAYER_2D_TEXTURE, FT_NOMIPS);
 #endif
 
-	LogDebug("<CRenderWrapper> Create 2D texture with name <" VIDEO_PLAYER_2D_TEXTURE "> id <%d>", m_2DTextureID);
+	LogDebug("<CRenderWrapper> Create 2D texture with name <" VIDEO_PLAYER_2D_TEXTURE "> id <%d> resolution <%dx%d>", m_2DTextureID, screenWidth, screenHeight);
 }
 
 double CRenderWrapper::RenderFrameToMainWindow(CVideoFrame* pFrame)
@@ -53,7 +53,7 @@ double CRenderWrapper::RenderFrameToMainWindow(CVideoFrame* pFrame)
 #elif CRY_VERSION == 55
 		m_2DTextureID = gEnv->pRenderer->UploadToVideoMemory(nullptr, pFrame->displayWidth(), pFrame->displayHeight(), eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, VIDEO_PLAYER_2D_TEXTURE, FT_NOMIPS);
 #endif
-		LogDebug("<CRenderWrapper> Create 2D texture with name <" VIDEO_PLAYER_2D_TEXTURE "> id <%d>", m_2DTextureID);
+		LogDebug("<CRenderWrapper> Create 2D texture with name <" VIDEO_PLAYER_2D_TEXTURE "> id <%d> resolution <%dx%d>", m_2DTextureID, pFrame->displayWidth(), pFrame->displayHeight());
 	}
 
 	if (m_2DTextureID > 0)
@@ -66,7 +66,7 @@ double CRenderWrapper::RenderFrameToMainWindow(CVideoFrame* pFrame)
 		}
 		else
 		{
-			LogError("<CRenderWrapper> Can't update texture with id <%d> - Texture not found ! Potential problem in releasing old texture!");
+			LogError("<CRenderWrapper> Can't update texture with id <%d> - Texture not found ! Potential problem in releasing old texture!", m_2DTextureID);
 		}
 
 		Draw2dImage(pTexture);	
@@ -103,7 +103,7 @@ int CRenderWrapper::CreateTextureForTextureVideo(int width, int height, const ch
 #elif CRY_VERSION == 55
 	int textureID = gEnv->pRenderer->UploadToVideoMemory(nullptr, width, height, eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, name, FT_NOMIPS);
 #endif
-	LogDebug("<CRenderWrapper> Create texture with id <%d> and name <%s>", textureID, name);
+	LogDebug("<CRenderWrapper> Create texture with id <%d> name <%s> resolution <%dx%d>", textureID, name, width, height);
 	return textureID;
 }
 
@@ -120,34 +120,19 @@ void CRenderWrapper::Draw2dImage(ITexture * pTex)
 	if (pTex != nullptr && gEnv->pRenderer != nullptr)
 	{
 		const int textWidth = pTex->GetWidth();
-		const int texthHeight = pTex->GetHeight();
+		const int textHeight = pTex->GetHeight();
 
 		const int screenWidth = gEnv->pRenderer->GetOverlayWidth();
 		const int screenHeight = gEnv->pRenderer->GetOverlayHeight();
 
-		if (textWidth > 0 && texthHeight > 0 && screenWidth > 0 && screenHeight > 0)
+		if (textWidth > 0 && textHeight > 0 && screenWidth > 0 && screenHeight > 0)
 		{
-			const float scaleX = (float)screenWidth / (float)textWidth;
-			const float scaleY = (float)screenHeight / (float)texthHeight;
-
-			const float scale = (scaleY * textWidth > screenWidth) ? scaleX : scaleY;
-
-			const float w = textWidth * scale;
-			const float h = texthHeight * scale;
-			const float x = (screenWidth - w) * 0.5f;
-			const float y = (screenHeight - h) * 0.5f;
-
-			const float vx = (800.0f / (float)screenWidth);
-			const float vy = (600.0f / (float)screenHeight);
-
-			const float finishWidth = w * vx;
-			const float finishHeight = h * vy;
-
+			// Draw 2D image to fullscreen window
 #if CRY_VERSION == 53 || CRY_VERSION == 54
-			gEnv->pRenderer->Draw2dImage(0, 0, finishWidth, finishHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
+			gEnv->pRenderer->Draw2dImage(0, 0, screenWidth, screenHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
 #elif CRY_VERSION == 55
-			IRenderAuxImage::Draw2dImage(0, 0, finishWidth, finishHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
-#endif
+			IRenderAuxImage::Draw2dImage(0, 0, screenWidth, screenHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
+#endif		
 		}
 	}
 }
