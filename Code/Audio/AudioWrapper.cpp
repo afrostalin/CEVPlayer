@@ -74,6 +74,13 @@ void CAudioWrapper::OnVideoPlayerEvent(EVideoPlayerEvents event)
 
 void CAudioWrapper::InsertAudioData(float * src, size_t count)
 {
+	if (gEnv->pSystem->IsQuitting())
+	{
+		SDL_PauseAudioDevice(m_audioDevice, 1);
+		ClearAudioData();
+		return;
+	}
+
 	std::lock_guard<std::mutex> lock(m_audioMutex);
 
 	m_audioBuffer.resize(m_audioBuffer.size() + count);
@@ -82,6 +89,13 @@ void CAudioWrapper::InsertAudioData(float * src, size_t count)
 
 bool CAudioWrapper::ReadAudioData(float * dst, size_t count)
 {
+	if (gEnv->pSystem->IsQuitting())
+	{
+		SDL_PauseAudioDevice(m_audioDevice, 1);
+		ClearAudioData();
+		return false;
+	}
+
 	std::lock_guard<std::mutex> lock(m_audioMutex);
 
 	if (m_audioBuffer.size() < count)
