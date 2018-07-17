@@ -77,6 +77,7 @@ void CVideoPlugin::RegisterCVars()
 		REGISTER_CVAR2("vp_use_CrySDL", &mEnv->m_bUseCrySDL, 1, VF_NULL, "If you use CryAudioImplSDLMixer - Set it to 1, if not - 0");
 		REGISTER_CVAR2("vp_debug_log", &mEnv->m_bDebugLog, 0, VF_NULL, "Video plugin debug log");
 		REGISTER_CVAR2("vp_debug_draw", &mEnv->m_bDebugDraw, 0, VF_NULL, "Video plugin debug draw");
+		REGISTER_CVAR2("vp_disableLogs", &mEnv->m_bDisableLog, 0, VF_NULL, "Disable logs from video plugin");
 	}
 }
 
@@ -93,6 +94,7 @@ void CVideoPlugin::UnRegisterCVars()
 		pConsole->UnregisterVariable("vp_use_CrySDL", true);
 		pConsole->UnregisterVariable("vp_debug_log", true);
 		pConsole->UnregisterVariable("vp_debug_draw", true);
+		pConsole->UnregisterVariable("vp_disableLogs", true);
 	}
 }
 
