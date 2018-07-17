@@ -28,11 +28,6 @@ class CInputDispatcher;
 #define SAFE_DELETE_ALIGNED_ARRAY(p) __pragma(message("[CRITICAL_ERROR] You try delete aligned array, but it feature disabled in project!"))
 #endif
 
-#define Log(...) do {  CryLog (TITLE __VA_ARGS__); } while(0)
-#define LogAlways(...) do { CryLogAlways (TITLE __VA_ARGS__); } while(0)
-#define LogWarning(...) do { CryWarning(VALIDATOR_MODULE_RENDERER, VALIDATOR_WARNING, TITLE __VA_ARGS__); } while(0)
-#define LogError(...) do { CryWarning(VALIDATOR_MODULE_RENDERER, VALIDATOR_ERROR, TITLE __VA_ARGS__); } while(0)
-
 // Global plugin environment
 struct SPluginEnv
 {
@@ -46,11 +41,16 @@ struct SPluginEnv
 	int m_bDebugLog = 0;
 	int m_bDebugDraw = 0;
 	int m_bUseCrySDL = 1;
+	int m_bDisableLog = 0;
 };
 
 extern SPluginEnv* mEnv;
 
-#define LogDebug(...) do {  if(mEnv->m_bDebugLog) {CryLog (TITLE __VA_ARGS__);} } while(0)
+#define Log(...) do { if(!mEnv->m_bDisableLog) { CryLog (TITLE __VA_ARGS__); } } while(0)
+#define LogDebug(...) do { if(mEnv->m_bDebugLog) { CryLog (TITLE __VA_ARGS__); } } while(0)
+#define LogAlways(...) do { if(!mEnv->m_bDisableLog) { CryLogAlways (TITLE __VA_ARGS__);} } while(0)
+#define LogWarning(...) do { if(!mEnv->m_bDisableLog) { CryWarning(VALIDATOR_MODULE_RENDERER, VALIDATOR_WARNING, TITLE __VA_ARGS__);} } while(0)
+#define LogError(...) do { if(!mEnv->m_bDisableLog) { CryWarning(VALIDATOR_MODULE_RENDERER, VALIDATOR_ERROR, TITLE __VA_ARGS__);} } while(0)
 
 static ColorB s_debugColorWhite(255, 255, 255);
 static ColorB s_debugColorYellow(255, 255, 0);
