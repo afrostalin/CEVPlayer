@@ -31,7 +31,7 @@ void CVideoPluginThreadManager::SpawnDecoderThread()
 	}
 	else
 	{
-		Log("<CVideoPluginThreadManager> Video decoder thread spawned");
+		LogDebug("<CVideoPluginThreadManager> Video decoder thread spawned");
 	}
 }
 
