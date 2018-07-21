@@ -58,8 +58,7 @@ SVideoPlayerResult CVideoPlayer::load(const char *fileName, bool preloaded, bool
 	reset();
 
 	string videoFileName;
-	videoFileName.Format(VIDEO_FOLDER "%s" VEDEO_FORMAT_EXT, fileName);
-
+	videoFileName.Format(VIDEO_FOLDER "%s" VIDEO_FORMAT_EXT, fileName);
 
 	int maj, min, build, rev;
 	mkvparser::GetVersion(maj, min, build, rev);
@@ -313,6 +312,7 @@ void CVideoPlayer::destroy()
 	}
 
 	SAFE_DELETE_11(m_frameBuffer);
+
 	SAFE_DELETE_11(m_packetPool);
 
 	sws_freeContext(m_pSwsContext);
@@ -773,9 +773,9 @@ void CVideoPlayer::ExecuteEvent(EVideoPlayerEvents event)
 		m_audioWrapper->OnVideoPlayerEvent(event); // TODO - Make it listener
 	}
 
-	for (const auto &it : m_Listeners)
+	if (mEnv->pVideoQueue != nullptr && event != EVideoPlayerEvents::OnStop)
 	{
-		it->OnVideoPlayerEvent(event);
+		mEnv->pVideoQueue->ExecuteVideoEvent(event);
 	}
 }
 

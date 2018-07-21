@@ -56,7 +56,7 @@ public:
 	void Stop();
 public:
 	// IVideoPlayerEventListener
-	virtual void OnVideoPlayerEvent(EVideoPlayerEvents event) override;
+	virtual void OnVideoPlayerEvent(const char* videoFileName, EVideoPlayerEvents event) override;
 	// ~IVideoPlayerEventListener
 public:
 	bool                     m_IsAutoPlay = false;

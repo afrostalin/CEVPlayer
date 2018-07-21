@@ -162,6 +162,8 @@ void C2DVideoQueue::Play2DVideo(const char * videoName, bool preload, bool loope
 
 			m_p2DVideoPlayer->play();
 
+			m_videoFileName = videoName;
+
 			return;
 		}
 		default:
@@ -222,6 +224,8 @@ void C2DVideoQueue::Stop2DVideo()
 		SAFE_DELETE_11(m_p2DVideoBuffer);
 
 		m_pRenderWrapper->Release2DVideoTextures();
+
+		ExecuteVideoEvent(EVideoPlayerEvents::OnStop);
 	}
 	else
 	{
@@ -272,7 +276,10 @@ void C2DVideoQueue::Register2DVideoPlayerListener(IVideoPlayerEventListener * li
 {
 	if (m_p2DVideoPlayer != nullptr)
 	{
-		m_p2DVideoPlayer->registerEventListener(listener);
+		if (stl::find(m_Listeners, listener))
+			return;
+
+		m_Listeners.push_back(listener);
 	}
 }
 
@@ -280,7 +287,14 @@ void C2DVideoQueue::Unregister2DVideoPlayerListener(IVideoPlayerEventListener * 
 {
 	if (m_p2DVideoPlayer != nullptr)
 	{
-		m_p2DVideoPlayer->unregisterEventListener(listener);
+		for (auto it = m_Listeners.begin(); it != m_Listeners.end(); ++it)
+		{
+			if ((*it) == listener)
+			{
+				m_Listeners.erase(it);
+				break;
+			}
+		}
 	}
 }
 
@@ -345,4 +359,12 @@ void C2DVideoQueue::Draw2DVideo(float fDeltaTime)
 	}
 	
 	m_p2DVideoPlayer->frameBuffer()->unlockRead();
+}
+
+void C2DVideoQueue::ExecuteVideoEvent(EVideoPlayerEvents event)
+{
+	for (const auto &it : m_Listeners)
+	{
+		it->OnVideoPlayerEvent(m_videoFileName.c_str(), event);
+	}
 }

@@ -44,6 +44,7 @@ public:
 	void              OnActionPause2DVideo(EInputState activationMode, float value);
 	void              OnActionSkip2DVideo(EInputState activationMode, float value);
 public:
+	void              ExecuteVideoEvent(EVideoPlayerEvents event);
 	void              Register2DVideoPlayerListener(IVideoPlayerEventListener* listener);
 	void              Unregister2DVideoPlayerListener(IVideoPlayerEventListener* listener);
 private:
@@ -54,4 +55,7 @@ private:
 private:
 	CRenderWrapper*   m_pRenderWrapper;
 	double            m_lastFrameTime;
+private:
+	std::vector<IVideoPlayerEventListener*> m_Listeners;
+	std::string       m_videoFileName;
 };

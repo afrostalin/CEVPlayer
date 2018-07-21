@@ -29,14 +29,14 @@ CVideoFrameBuffer::~CVideoFrameBuffer()
 {
 	SAFE_DELETE_11(m_readFrame);
 
-	while (m_writeQueue.size() > 0)
+	while (m_writeQueue.size() > 0 && !gEnv->pSystem->IsQuitting())
 	{
 		CVideoFrame *frame = m_writeQueue.front();
 		SAFE_DELETE_11(frame);
 		m_writeQueue.pop();
 	}
-
-	while (m_readQueue.size() > 0)
+	
+	while (m_readQueue.size() > 0 && !gEnv->pSystem->IsQuitting())
 	{
 		CVideoFrame *frame = m_readQueue.front();
 		SAFE_DELETE_11(frame);

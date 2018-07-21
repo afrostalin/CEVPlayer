@@ -155,7 +155,7 @@ public:
 		s->Add(*this);
 	}
 public:
-	void OnVideoPlayerEvent(EVideoPlayerEvents event) override
+	void OnVideoPlayerEvent(const char* videoFileName, EVideoPlayerEvents event) override
 	{
 		if (gEnv->pSystem != nullptr && gEnv->pSystem->IsQuitting())
 		{
@@ -329,7 +329,7 @@ public:
 		return new CFlowNode_TextureVideoPlayer(pActInfo);
 	}
 public:
-	void OnVideoPlayerEvent(EVideoPlayerEvents event) override
+	void OnVideoPlayerEvent(const char* videoFileName, EVideoPlayerEvents event) override
 	{
 		if (gEnv->pSystem != nullptr && gEnv->pSystem->IsQuitting())
 		{
@@ -604,7 +604,7 @@ public:
 		}
 	}
 public:
-		void OnVideoPlayerEvent(EVideoPlayerEvents event) override
+		void OnVideoPlayerEvent(const char* videoFileName, EVideoPlayerEvents event) override
 		{
 			if (gEnv->pSystem != nullptr && gEnv->pSystem->IsQuitting())
 			{
