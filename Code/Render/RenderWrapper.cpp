@@ -130,7 +130,7 @@ void CRenderWrapper::Draw2dImage(ITexture * pTex)
 #if CRY_VERSION == 53 || CRY_VERSION == 54
 			gEnv->pRenderer->Draw2dImage(0, 0, 800.0f, 600.0f, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
 #elif CRY_VERSION == 55
-			IRenderAuxImage::Draw2dImage(0, 0, 800.0f, 600.0f, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
+			IRenderAuxImage::Draw2dImage(0, 0, screenWidth, screenHeight, pTex->GetTextureID(), 0.0f, 1.0f, 1.0f, 0.0f);
 #endif		
 		}
 	}

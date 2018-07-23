@@ -21,7 +21,11 @@ C2DVideoQueue::C2DVideoQueue()
 {
 	if (gEnv->pGameFramework != nullptr)
 	{
+#if CRY_VERSION == 53 || CRY_VERSION == 54
 		gEnv->pGameFramework->RegisterListener(this, "C2DVideoQueue_GameFrameworkListener", FRAMEWORKLISTENERPRIORITY_MENU);
+#elif CRY_VERSION == 55
+		gEnv->pGameFramework->RegisterListener(this, "C2DVideoQueue_GameFrameworkListener", FRAMEWORKLISTENERPRIORITY_DEFAULT);
+#endif
 	}
 
 	if (gEnv->pSystem != nullptr)
