@@ -46,11 +46,12 @@ public:
 	// ~ISystemEventListener
 
 	// IVideoPlugin
-	virtual void        Play2DVideo(const char * videoName, bool preload = false, bool looped = false, int audioTrack = 0, bool isSkippable = false, bool canBePaused = false, IVideoPlayerEventListener* pVideoPlayerListener = nullptr) override;
-	virtual void        Pause2DVideo() override;
-	virtual void        Resume2DVideo() override;
-	virtual void        Stop2DVideo() override;
-	virtual bool        Is2DVideoCurrentlyPlaying() override;
+	virtual void PlayVideoToMainWindow(const char * videoName, bool preload = false, bool looped = false, int audioTrack = 0,
+		bool isSkippable = false, bool canBePaused = false, IVideoPlayerEventListener* pVideoPlayerListener = nullptr) override;
+	virtual void PlayVideoToTexture(const char* videoName, const char* textureName, bool preload = false, bool looped = false, IVideoPlayerEventListener* pListener = nullptr) override;
+	virtual void PauseVideo(EVideoType videoType, const char* textureName = nullptr) override;
+	virtual void ResumeVideo(EVideoType videoType, const char* textureName = nullptr) override;
+	virtual void StopVideo(EVideoType videoType, const char* textureName = nullptr) override;
 	// ~IVideoPlugin
 public:
 	void        RegisterCVars();

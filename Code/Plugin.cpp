@@ -214,7 +214,7 @@ void CVideoPlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR l
 	}
 }
 
-void CVideoPlugin::Play2DVideo(const char * videoName, bool preload, bool looped, int audioTrack, bool isSkippable, bool canBePaused, IVideoPlayerEventListener* pVideoPlayerListener)
+void CVideoPlugin::PlayVideoToMainWindow(const char * videoName, bool preload, bool looped, int audioTrack, bool isSkippable, bool canBePaused, IVideoPlayerEventListener* pVideoPlayerListener)
 {
 	if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
 	{
@@ -231,54 +231,121 @@ void CVideoPlugin::Play2DVideo(const char * videoName, bool preload, bool looped
 	}
 }
 
-void CVideoPlugin::Pause2DVideo()
+void CVideoPlugin::PlayVideoToTexture(const char * videoName, const char * textureName, bool preload, bool looped, IVideoPlayerEventListener * pListener)
 {
-	if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
+	if (mEnv != nullptr && mEnv->pTextureVideoQueue != nullptr) 
 	{
-		mEnv->pVideoQueue->Pause2DVideo();
+		mEnv->pTextureVideoQueue->PlayVideo(pListener, videoName, textureName, preload, looped);
 	}
 	else
 	{
-		LogError("<CVideoPlugin> Can't pause 2D video video queue == nullptr!");
+		LogError("<CVideoPlugin> Can't play texture video, because texture queue == nullptr!");
 	}
 }
 
-void CVideoPlugin::Resume2DVideo()
+void CVideoPlugin::PauseVideo(EVideoType videoType, const char* textureName)
 {
-	if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
+	switch (videoType)
 	{
-		mEnv->pVideoQueue->Resume2DVideo();
+	case EVideoType::ToMainWindow:
+	{
+		if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
+		{
+			mEnv->pVideoQueue->Pause2DVideo();
+		}
+		else
+		{
+			LogError("<CVideoPlugin> Can't pause 2D video video queue == nullptr!");
+		}
+
+		break;
 	}
-	else
+	case EVideoType::ToTexture:
 	{
-		LogError("<CVideoPlugin> Can't resume 2D video video queue == nullptr!");
+		if (mEnv != nullptr && mEnv->pTextureVideoQueue != nullptr)
+		{
+			mEnv->pTextureVideoQueue->PauseVideo(textureName);
+		}
+		else
+		{
+			LogError("<CVideoPlugin> Can't pause texture video, because texture queue == nullptr!");
+		}
+
+		break;
+	}
+	default:
+		break;
+	}	
+}
+
+void CVideoPlugin::ResumeVideo(EVideoType videoType, const char* textureName)
+{
+	switch (videoType)
+	{
+	case EVideoType::ToMainWindow:
+	{
+		if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
+		{
+			mEnv->pVideoQueue->Resume2DVideo();
+		}
+		else
+		{
+			LogError("<CVideoPlugin> Can't resume 2D video video queue == nullptr!");
+		}
+
+		break;
+	}
+	case EVideoType::ToTexture:
+	{
+		if (mEnv != nullptr && mEnv->pTextureVideoQueue != nullptr)
+		{
+			mEnv->pTextureVideoQueue->ResumeVideo(textureName);
+		}
+		else
+		{
+			LogError("<CVideoPlugin> Can't resume texture video, because texture queue == nullptr!");
+		}
+
+		break;
+	}
+	default:
+		break;
 	}
 }
 
-void CVideoPlugin::Stop2DVideo()
+void CVideoPlugin::StopVideo(EVideoType videoType, const char* textureName)
 {
-	if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
+	switch (videoType)
 	{
-		mEnv->pVideoQueue->Stop2DVideo();
-	}
-	else
+	case EVideoType::ToMainWindow:
 	{
-		LogError("<CVideoPlugin> Can't stop 2D video video queue == nullptr!");
-	}
-}
+		if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
+		{
+			mEnv->pVideoQueue->Stop2DVideo();
+		}
+		else
+		{
+			LogError("<CVideoPlugin> Can't stop 2D video video queue == nullptr!");
+		}
 
-bool CVideoPlugin::Is2DVideoCurrentlyPlaying()
-{
-	if (mEnv != nullptr && mEnv->pVideoQueue != nullptr)
-	{
-		return mEnv->pVideoQueue->Is2DVideoPlayingNow();
+		break;
 	}
-	else
+	case EVideoType::ToTexture:
 	{
-		LogError("<CVideoPlugin> Can't get 2D video info because video queue == nullptr!");
-	}
+		if (mEnv != nullptr && mEnv->pTextureVideoQueue != nullptr)
+		{
+			mEnv->pTextureVideoQueue->StopVideo(textureName);
+		}
+		else
+		{
+			LogError("<CVideoPlugin> Can't stop texture video, because texture queue == nullptr!");
+		}
 
-	return false;
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 CRYREGISTER_SINGLETON_CLASS(CVideoPlugin)

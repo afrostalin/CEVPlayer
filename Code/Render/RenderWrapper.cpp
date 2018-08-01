@@ -8,6 +8,10 @@
 
 #define VIDEO_PLAYER_2D_TEXTURE "$video_player_2D"
 
+#include <Cry3DEngine/IIndexedMesh.h>
+#include <CryEntitySystem/IEntitySystem.h>
+#include <CryRenderer/IRenderer.h>
+
 CRenderWrapper::~CRenderWrapper()
 {
 	Release2DVideoTextures();
