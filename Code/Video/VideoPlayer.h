@@ -177,4 +177,5 @@ private:
 
 	std::vector<IVideoPlayerEventListener*> m_Listeners;
 	SwsContext*                    m_pSwsContext;
+	std::string                    m_fileName;
 };

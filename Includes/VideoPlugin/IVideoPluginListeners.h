@@ -15,5 +15,5 @@ struct IVideoPlayerEventListener
 {
 	virtual ~IVideoPlayerEventListener() {}
 
-	virtual void OnVideoPlayerEvent(EVideoPlayerEvents event) = 0;
+	virtual void OnVideoPlayerEvent(const char* videoFileName, EVideoPlayerEvents event) = 0;
 };

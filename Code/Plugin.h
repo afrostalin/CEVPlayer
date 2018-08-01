@@ -33,24 +33,25 @@ public:
 	virtual ~CVideoPlugin();
 public:
 	// ICryPlugin
-	const char* GetName() const override { return "CEVPlayer"; }
-	const char* GetCategory() const override { return "Render"; }
-	bool        Initialize(SSystemGlobalEnvironment& env, const SSystemInitParams& initParams) override;
+	virtual const char* GetName() const override { return "CEVPlayer"; }
+	virtual const char* GetCategory() const override { return "Render"; }
+	virtual bool        Initialize(SSystemGlobalEnvironment& env, const SSystemInitParams& initParams) override;
 #if CRY_VERSION == 53 || CRY_VERSION == 54
-	void        OnPluginUpdate(EPluginUpdateType updateType) override {};
+	virtual void        OnPluginUpdate(EPluginUpdateType updateType) override {};
 #endif
 	// ~ICryPlugin
 
 	// ISystemEventListener
-	void        OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR lparam) override;
+	virtual void        OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR lparam) override;
 	// ~ISystemEventListener
 
 	// IVideoPlugin
-	void        Play2DVideo(const char * videoName, bool preload = false, bool looped = false, int audioTrack = 0, bool isSkippable = false, bool canBePaused = false, IVideoPlayerEventListener* pVideoPlayerListener = nullptr) override;
-	void        Pause2DVideo() override;
-	void        Resume2DVideo() override;
-	void        Stop2DVideo() override;
-	bool        Is2DVideoCurrentlyPlaying() override;
+	virtual void PlayVideoToMainWindow(const char * videoName, bool preload = false, bool looped = false, int audioTrack = 0,
+		bool isSkippable = false, bool canBePaused = false, IVideoPlayerEventListener* pVideoPlayerListener = nullptr) override;
+	virtual void PlayVideoToTexture(const char* videoName, const char* textureName, bool preload = false, bool looped = false, IVideoPlayerEventListener* pListener = nullptr) override;
+	virtual void PauseVideo(EVideoType videoType, const char* textureName = nullptr) override;
+	virtual void ResumeVideo(EVideoType videoType, const char* textureName = nullptr) override;
+	virtual void StopVideo(EVideoType videoType, const char* textureName = nullptr) override;
 	// ~IVideoPlugin
 public:
 	void        RegisterCVars();

@@ -6,6 +6,11 @@
 #include <CrySystem/ICryPlugin.h>
 #include "IVideoPluginListeners.h"
 
+enum class EVideoType : int
+{
+	ToMainWindow = 0,
+	ToTexture,
+};
 
 struct IVideoPlugin 
 #if CRY_VERSION == 53 || CRY_VERSION == 54
@@ -20,10 +25,18 @@ struct IVideoPlugin
 	CRYINTERFACE_DECLARE(IVideoPlugin, 0xAAB3D63C77A4482A, 0x8D253E362B906321);
 #endif 
 public:
-	virtual void Play2DVideo(const char * videoName, bool preload = false, bool looped = false, int audioTrack = 0,
+	//! Stream video to main window
+	virtual void PlayVideoToMainWindow(const char * videoName, bool preload = false, bool looped = false, int audioTrack = 0,
 		bool isSkippable = false, bool canBePaused = false, IVideoPlayerEventListener* pVideoPlayerListener = nullptr) = 0;
-	virtual void Pause2DVideo() = 0;
-	virtual void Resume2DVideo() = 0;
-	virtual void Stop2DVideo() = 0;
-	virtual bool Is2DVideoCurrentlyPlaying() = 0;
+	//! Stream video to texture only
+	virtual void PlayVideoToTexture(const char* videoName, const char* textureName, bool preload = false, bool looped = false, IVideoPlayerEventListener* pListener = nullptr) = 0;
+
+	//! Pause video - textureName argument used only for pausing video streamed to texture
+	virtual void PauseVideo(EVideoType videoType, const char* textureName = nullptr) = 0;
+
+	//! Resume video - textureName argument used only for pausing video streamed to texture
+	virtual void ResumeVideo(EVideoType videoType, const char* textureName = nullptr) = 0;
+
+	//! Stop video - textureName argument used only for pausing video streamed to texture
+	virtual void StopVideo(EVideoType videoType, const char* textureName = nullptr) = 0;
 };

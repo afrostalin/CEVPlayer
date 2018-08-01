@@ -205,7 +205,7 @@ void CTextureVideoPlayerComponent::Stop()
 	}
 }
 
-void CTextureVideoPlayerComponent::OnVideoPlayerEvent(EVideoPlayerEvents event)
+void CTextureVideoPlayerComponent::OnVideoPlayerEvent(const char* videoFileName, EVideoPlayerEvents event)
 {
 	if (gEnv->pSystem != nullptr && gEnv->pSystem->IsQuitting())
 	{
