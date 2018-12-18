@@ -149,6 +149,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	${SDL2_LIB}/SDL2.lib
 	${LIBAV_LIB}/swscale.lib)
 
+target_compile_definitions(${PROJECT_NAME} PUBLIC $<$<CONFIG:RELEASE>:_RELEASE>)
+
 if (WIN32)
 	target_link_libraries(${PROJECT_NAME} PRIVATE Ntdll)
 endif(WIN32)
