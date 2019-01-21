@@ -19,7 +19,7 @@
 * Open solution with Visual Studio and build it
 
 # Branches 
-* `master` - Main branch for latest CRYENGINE version (CRYENGINE 5.5.0 Preview 4)
+* `master` - Main branch for latest CRYENGINE version (CRYENGINE 5.5)
 * `cryengine_5.4` - If you need build plugin for CRYENGINE 5.4
 * `cryengine_5.3` - If you need build plugin for CRYENGINE 5.3
 
