@@ -193,7 +193,7 @@ void CVideoPlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR l
 					CVideoPlugin::GetCID(),
 					"EntityComponents",
 					"Ilya Chernetsov",
-					"CEVNetwork components",
+					"CEVPlayer components",
 					[this](Schematyc::IEnvRegistrar& registrar) { RegisterComponents(registrar); }
 					)
 			);
