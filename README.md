@@ -10,6 +10,10 @@
 * Full source code 
 * Absolutly free license
 
+# Projects using this plugin
+* <a href=https://store.steampowered.com/app/345430/The_Cursed_Forest/>The Cursed Forest</a>
+* <a href=https://store.steampowered.com/app/939510/Pandemic_Express__Zombie_Escape/>Pandemic Express - Zombie Escape</a>
+
 # Building
 ## Before compiling
 * Download full source code from official <a href=https://github.com/CRYTEK/CRYENGINE/releases>CRYENGINE repository</a>
