@@ -15,38 +15,40 @@
 
 #include "Frame.h"
 
-
-class CVideoPlayer;
-
-class CVideoFrameBuffer
+namespace CEVPlayer
 {
-public:
-	CVideoFrameBuffer(CVideoPlayer *parent, size_t width, size_t height, size_t frameCount);
-	~CVideoFrameBuffer();
-public:
-	void          reset();
+	class CVideoPlayer;
 
-	CVideoFrame*  lockRead();
-	void          unlockRead();
+	class CVideoFrameBuffer
+	{
+	public:
+		CVideoFrameBuffer(CVideoPlayer* parent, size_t width, size_t height, size_t frameCount);
+		~CVideoFrameBuffer();
+	public:
+		void          reset();
 
-	CVideoFrame*  lockWrite(double time);
-	void          unlockWrite();
+		CVideoFrame* lockRead();
+		void          unlockRead();
 
-	void          update(double playTime, double frameTime);
-	bool          isFull();
-protected:
-	CVideoPlayer*                 m_parent;
+		CVideoFrame* lockWrite(double time);
+		void          unlockWrite();
 
-	size_t                        m_frameCount;
-	size_t                        m_width;
-	size_t                        m_height;
+		void          update(double playTime, double frameTime);
+		bool          isFull();
+	protected:
+		CVideoPlayer* m_parent;
 
-	CVideoFrame*                  m_readFrame;
-	std::mutex                    m_readLock;
-	std::mutex                    m_updateLock;
+		size_t                        m_frameCount;
+		size_t                        m_width;
+		size_t                        m_height;
 
-	ThreadSafeQueue<CVideoFrame*> m_readQueue;
-	ThreadSafeQueue<CVideoFrame*> m_writeQueue;
-	CVideoFrame*                  m_writeFrame;
-	double                        m_LastReadFrameTime;
-};
+		CVideoFrame* m_readFrame;
+		std::mutex                    m_readLock;
+		std::mutex                    m_updateLock;
+
+		ThreadSafeQueue<CVideoFrame*> m_readQueue;
+		ThreadSafeQueue<CVideoFrame*> m_writeQueue;
+		CVideoFrame* m_writeFrame;
+		double                        m_LastReadFrameTime;
+	};
+}

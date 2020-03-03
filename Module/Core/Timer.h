@@ -7,30 +7,32 @@
 #include <Windows.h>
 #include <atomic>
 
-
-class CVideoPlayerTimer
+namespace CEVPlayer
 {
-public:
-	CVideoPlayerTimer();
-	~CVideoPlayerTimer();
+	class CVideoPlayerTimer
+	{
+	public:
+		CVideoPlayerTimer();
+		~CVideoPlayerTimer();
 
-public:
-	typedef LARGE_INTEGER TimePoint;
+	public:
+		typedef LARGE_INTEGER TimePoint;
 
-	TimePoint m_start;
-	TimePoint m_pauseStart;
+		TimePoint m_start;
+		TimePoint m_pauseStart;
 
-	double    m_pauseDuration;
+		double    m_pauseDuration;
 
-	void      now(TimePoint& tp);
-	double    secondsElapsed(const TimePoint& start, const TimePoint& end);
-public:
-	void      start();
-	void      stop();
-	void      pause();
-	void      resume();
+		void      now(TimePoint& tp);
+		double    secondsElapsed(const TimePoint& start, const TimePoint& end);
+	public:
+		void      start();
+		void      stop();
+		void      pause();
+		void      resume();
 
-	double    elapsedSeconds();
-protected:
-	std::atomic<bool> m_active;
-};
+		double    elapsedSeconds();
+	protected:
+		std::atomic<bool> m_active;
+	};
+}

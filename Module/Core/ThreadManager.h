@@ -3,20 +3,23 @@
 
 #pragma once
 
-class CDecoderThread;
-class CVideoPlayer;
-
-class CVideoPluginThreadManager
+namespace CEVPlayer
 {
-public:
-	CVideoPluginThreadManager();
-	~CVideoPluginThreadManager();
-public:
-	void SpawnDecoderThread();
-	void Release();
-public:
-	void PushPlayer(CVideoPlayer* pPlayer);
-	void RemovePlayer(CVideoPlayer* pPlayer);
-private:
-	CDecoderThread* m_DecoderThread;
-};
+	class CDecoderThread;
+	class CVideoPlayer;
+
+	class CVideoPluginThreadManager
+	{
+	public:
+		CVideoPluginThreadManager();
+		~CVideoPluginThreadManager();
+	public:
+		void SpawnDecoderThread();
+		void Release();
+	public:
+		void PushPlayer(CVideoPlayer* pPlayer);
+		void RemovePlayer(CVideoPlayer* pPlayer);
+	private:
+		CDecoderThread* m_DecoderThread;
+	};
+}

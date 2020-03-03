@@ -53,10 +53,11 @@ add_sources("CEVPlayer_render_uber_0.cpp"
 		"Render/FrameBuffer.h"
 		"Render/RenderWrapper.h"
 )
-add_sources("CEVPlayer_schematyc_uber_0.cpp"
-    SOURCE_GROUP "Schematyc"
-		"Schematyc/TextureVideoPlayerComponent.cpp"
-		"Schematyc/TextureVideoPlayerComponent.h"
+add_sources("CEVPlayer_components_uber_0.cpp"
+    SOURCE_GROUP "Components"
+		"Components/TextureVideoPlayerComponent.cpp"
+		"Components/TextureVideoPlayerComponent.h"
+		"Components/ILightComponent.h"
 )
 add_sources("CEVPlayer_utils_uber_0.cpp"
     SOURCE_GROUP "Utils"
@@ -81,7 +82,7 @@ add_sources("CEVPlayer_video_uber_0.cpp"
 
 end_sources()
 
-CryEngineModule(CEVPlayer PCH "StdAfx.cpp" SOLUTION_FOLDER "_CustomPlugins_")
+CryEngineModule(CEVPlayer FORCE_SHARED_WIN PCH "StdAfx.cpp" SOLUTION_FOLDER "_SpaceRaccoon_/Plugins")
 
 target_include_directories(${THIS_PROJECT} 
 	PRIVATE 
@@ -122,7 +123,7 @@ include_directories(
 	${LIBVORBIS_INCLUDE} 
 	${LIBAV_INCLUDE})
 	
-if(NOT OPTION_STATIC_LINKING)
+#if(NOT OPTION_STATIC_LINKING)
 	target_link_libraries(${THIS_PROJECT} PRIVATE 
 		${LIBWEBM_LIB}/release/libwebm.lib
 		${LIBVPX_LIB}/libvpx.lib
@@ -130,15 +131,15 @@ if(NOT OPTION_STATIC_LINKING)
 		${LIBVORBIS_LIB}/release/libvorbis_static.lib
 		${LIBVORBIS_LIB}/release/libvorbisfile_static.lib
 		${LIBAV_LIB}/swscale.lib)
-else()
-	set_property(TARGET ${THIS_PROJECT} PROPERTY INTERFACE_LINK_LIBRARIES 
-		${LIBWEBM_LIB}/release/libwebm.lib
-		${LIBVPX_LIB}/libvpx.lib
-		${LIBOGG_LIB}/release/libogg_static.lib
-		${LIBVORBIS_LIB}/release/libvorbis_static.lib
-		${LIBVORBIS_LIB}/release/libvorbisfile_static.lib
-		${LIBAV_LIB}/swscale.lib)
-endif() 
+#else()
+#	set_property(TARGET ${THIS_PROJECT} PROPERTY INTERFACE_LINK_LIBRARIES 
+#		${LIBWEBM_LIB}/release/libwebm.lib
+#		${LIBVPX_LIB}/libvpx.lib
+#		${LIBOGG_LIB}/release/libogg_static.lib
+#		${LIBVORBIS_LIB}/release/libvorbis_static.lib
+#		${LIBVORBIS_LIB}/release/libvorbisfile_static.lib
+#		${LIBAV_LIB}/swscale.lib)
+#endif() 
 
 target_link_libraries(${THIS_PROJECT} PRIVATE SDL2)
 

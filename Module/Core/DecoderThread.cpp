@@ -12,62 +12,65 @@
 
 #include "Video/2DVideoQueue.h"
 
-void CDecoderThread::ThreadEntry()
+namespace CEVPlayer
 {
-	while (!bIsReadyToClose && !gEnv->pSystem->IsQuitting())
+	void CDecoderThread::ThreadEntry()
 	{
-		unsigned int sleepTime = 1;
-
-		m_Mutex.Lock();
+		while (!bIsReadyToClose && !gEnv->pSystem->IsQuitting())
 		{
-			DecodeProcess();
+			unsigned int sleepTime = 1;
 
-			if (m_Players.empty())
+			m_Mutex.Lock();
 			{
-				sleepTime = 300; // When we don't have any video for decoding - sleep more
+				DecodeProcess();
+
+				if (m_Players.empty())
+				{
+					sleepTime = 300; // When we don't have any video for decoding - sleep more
+				}
+			}
+			m_Mutex.Unlock();
+
+			CrySleep(sleepTime);
+		}
+
+		m_Players.clear();
+	}
+
+	void CDecoderThread::PushPlayer(CVideoPlayer* pPlayer)
+	{
+		m_Mutex.Lock();
+		m_Players.push_back(pPlayer);
+		m_Mutex.Unlock();
+	}
+
+	void CDecoderThread::RemovePlayer(CVideoPlayer* pPlayer)
+	{
+		m_Mutex.Lock();
+		for (auto it = m_Players.begin(); it != m_Players.end(); ++it)
+		{
+			if (*it == pPlayer)
+			{
+				m_Players.erase(it);
+				break;
 			}
 		}
 		m_Mutex.Unlock();
-
-		CrySleep(sleepTime);
 	}
 
-	m_Players.clear();
-}
-
-void CDecoderThread::PushPlayer(CVideoPlayer * pPlayer)
-{
-	m_Mutex.Lock();
-	m_Players.push_back(pPlayer);
-	m_Mutex.Unlock();
-}
-
-void CDecoderThread::RemovePlayer(CVideoPlayer * pPlayer)
-{
-	m_Mutex.Lock();
-	for (auto it = m_Players.begin(); it != m_Players.end(); ++it)
+	void CDecoderThread::DecodeProcess()
 	{
-		if (*it == pPlayer)
+		if ((gEnv->pSystem != nullptr && gEnv->pSystem->IsQuitting()) || gEnv->pSystem == nullptr || m_Players.empty())
 		{
-			m_Players.erase(it);
-			break;
+			return;
 		}
-	}
-	m_Mutex.Unlock();
-}
 
-void CDecoderThread::DecodeProcess()
-{
-	if ((gEnv->pSystem != nullptr && gEnv->pSystem->IsQuitting()) || gEnv->pSystem == nullptr || m_Players.empty())
-	{
-		return;
-	}
-
-	for (auto it : m_Players)
-	{
-		if (it != nullptr && (it->isPlaying() || it->isBuffering()))
+		for (auto it : m_Players)
 		{
-			it->decode();
-		}	
+			if (it != nullptr && (it->isPlaying() || it->isBuffering()))
+			{
+				it->decode();
+			}
+		}
 	}
 }

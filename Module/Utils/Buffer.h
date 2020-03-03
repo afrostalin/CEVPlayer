@@ -5,46 +5,48 @@
 
 #include <cstdio>
 
-
-template<typename T>
-class Buffer
+namespace CEVPlayer
 {
-protected:
-	T*      m_data;
-	size_t  m_size;
-
-	void  resize(size_t newSize)
+	template<typename T>
+	class Buffer
 	{
-		SAFE_DELETE_ARRAY_11(m_data);
+	protected:
+		T* m_data;
+		size_t  m_size;
 
-		m_data = new T[newSize];
-		m_size = newSize;
-	}
+		void  resize(size_t newSize)
+		{
+			SAFE_DELETE_ARRAY_11(m_data);
 
-public:
+			m_data = new T[newSize];
+			m_size = newSize;
+		}
 
-	Buffer(size_t initialSize) :
-		m_data(nullptr),
-		m_size(0)
-	{
-		resize(initialSize);
-	}
+	public:
 
-	~Buffer()
-	{
-		SAFE_DELETE_ARRAY_11(m_data);
-	}
+		Buffer(size_t initialSize) :
+			m_data(nullptr),
+			m_size(0)
+		{
+			resize(initialSize);
+		}
 
-	T *get(size_t size)
-	{
-		if (size > m_size)
-			resize(size);
+		~Buffer()
+		{
+			SAFE_DELETE_ARRAY_11(m_data);
+		}
 
-		return m_data;
-	}
+		T* get(size_t size)
+		{
+			if (size > m_size)
+				resize(size);
 
-	size_t  size() const
-	{
-		return m_size;
-	}
-};
+			return m_data;
+		}
+
+		size_t  size() const
+		{
+			return m_size;
+		}
+	};
+}

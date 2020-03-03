@@ -7,62 +7,65 @@
 #include <ctime>
 #include <chrono>
 
-LARGE_INTEGER s_timerFrequency;
-
-CVideoPlayerTimer::CVideoPlayerTimer()
-	: m_active(false)
-	, m_pauseDuration(0.0)
+namespace CEVPlayer
 {
-	QueryPerformanceFrequency(&s_timerFrequency);
-}
+	LARGE_INTEGER s_timerFrequency;
 
-CVideoPlayerTimer::~CVideoPlayerTimer()
-{
-}
+	CVideoPlayerTimer::CVideoPlayerTimer()
+		: m_active(false)
+		, m_pauseDuration(0.0)
+	{
+		QueryPerformanceFrequency(&s_timerFrequency);
+	}
 
-void  CVideoPlayerTimer::start()
-{
-	now(m_start);
+	CVideoPlayerTimer::~CVideoPlayerTimer()
+	{
+	}
 
-	m_active = true;
-	m_pauseDuration = 0.0;
-}
+	void  CVideoPlayerTimer::start()
+	{
+		now(m_start);
 
-void  CVideoPlayerTimer::stop()
-{
-	m_active = false;
-}
+		m_active = true;
+		m_pauseDuration = 0.0;
+	}
 
-void  CVideoPlayerTimer::pause()
-{
-	now(m_pauseStart);
-}
+	void  CVideoPlayerTimer::stop()
+	{
+		m_active = false;
+	}
 
-void  CVideoPlayerTimer::resume()
-{
-	TimePoint end;
-	now(end);
+	void  CVideoPlayerTimer::pause()
+	{
+		now(m_pauseStart);
+	}
 
-	m_pauseDuration += secondsElapsed(m_pauseStart, end);
-}
+	void  CVideoPlayerTimer::resume()
+	{
+		TimePoint end;
+		now(end);
 
-double CVideoPlayerTimer::elapsedSeconds()
-{
-	if (!m_active)
-		return 0.0;
+		m_pauseDuration += secondsElapsed(m_pauseStart, end);
+	}
 
-	TimePoint end;
-	now(end);
+	double CVideoPlayerTimer::elapsedSeconds()
+	{
+		if (!m_active)
+			return 0.0;
 
-	return secondsElapsed(m_start, end) - m_pauseDuration;
-}
+		TimePoint end;
+		now(end);
 
-void CVideoPlayerTimer::now(TimePoint & tp)
-{
-	QueryPerformanceCounter(&tp);
-}
+		return secondsElapsed(m_start, end) - m_pauseDuration;
+	}
 
-double CVideoPlayerTimer::secondsElapsed(const TimePoint& start, const TimePoint& end)
-{
-	return (end.QuadPart - start.QuadPart) / (double)s_timerFrequency.QuadPart;
+	void CVideoPlayerTimer::now(TimePoint& tp)
+	{
+		QueryPerformanceCounter(&tp);
+	}
+
+	double CVideoPlayerTimer::secondsElapsed(const TimePoint& start, const TimePoint& end)
+	{
+		return (end.QuadPart - start.QuadPart) / (double)s_timerFrequency.QuadPart;
+	}
 }

@@ -6,32 +6,32 @@
 #include <cstdio>
 #include <memory>
 
-
-struct vpx_image;
-
-class CVideoFrame
+namespace CEVPlayer
 {
-public:
-	CVideoFrame(size_t width, size_t height);
-	~CVideoFrame();
-public:
-	void           copy(CVideoFrame *dst);
+	class CVideoFrame
+	{
+	public:
+		CVideoFrame(size_t width, size_t height);
+		~CVideoFrame();
+	public:
+		void           copy(CVideoFrame* dst);
 
-	unsigned char* rgba() const;
+		unsigned char* rgba() const;
 
-	size_t         displayWidth() const;
-	size_t         displayHeight() const;
+		size_t         displayWidth() const;
+		size_t         displayHeight() const;
 
-	void           setTime(double time);
-	double         time() const;
+		void           setTime(double time);
+		double         time() const;
 
-	void           setValid(bool valid) { m_isValid = valid; }
-	bool           isValid() const;
-private:
-	unsigned char* m_rgba;
-	unsigned int   m_nSize;
-	size_t         m_displayWidth;
-	size_t         m_displayHeight;
-	double         m_time;
-	bool           m_isValid;
-};
+		void           setValid(bool valid) { m_isValid = valid; }
+		bool           isValid() const;
+	private:
+		unsigned char* m_rgba;
+		unsigned int   m_nSize;
+		size_t         m_displayWidth;
+		size_t         m_displayHeight;
+		double         m_time;
+		bool           m_isValid;
+	};
+}

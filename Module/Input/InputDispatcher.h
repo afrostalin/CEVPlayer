@@ -6,29 +6,31 @@
 #include <CryCore/Platform/IPlatformOS.h>
 #include <IActionMapManager.h>
 
-
-typedef std::function<void(int activationMode, float value)> TActionCallback;
-
-class CInputDispatcher : public IActionListener
+namespace CEVPlayer
 {
-public:
-	CInputDispatcher();
-	~CInputDispatcher();
-public:
-	// IActionListener
-	void OnAction(const ActionId& action, int activationMode, float value) override;
-	// ~IActionListener
-public:
-	void RegisterAction(const char* szGroupName, const char* szName, TActionCallback callback);
-	void BindAction(const char* szGroupName, const char* szName, const char* enumName, EActionInputDevice device, EKeyId keyId, bool bOnPress = true, bool bOnRelease = true, bool bOnHold = true);
-private:
-	void AddAction(const char* szName, TActionCallback callback);
-protected:
-	struct SAction
+	typedef std::function<void(int activationMode, float value)> TActionCallback;
+
+	class CInputDispatcher : public IActionListener
 	{
-		const char* szName;
-		TActionCallback callback;
+	public:
+		CInputDispatcher();
+		~CInputDispatcher();
+	public:
+		// IActionListener
+		void OnAction(const ActionId& action, int activationMode, float value) override;
+		// ~IActionListener
+	public:
+		void RegisterAction(const char* szGroupName, const char* szName, TActionCallback callback);
+		void BindAction(const char* szGroupName, const char* szName, const char* enumName, EActionInputDevice device, EKeyId keyId, bool bOnPress = true, bool bOnRelease = true, bool bOnHold = true);
+	private:
+		void AddAction(const char* szName, TActionCallback callback);
+	protected:
+		struct SAction
+		{
+			const char* szName;
+			TActionCallback callback;
+		};
+	protected:
+		DynArray<SAction> m_actions;
 	};
-protected:
-	DynArray<SAction> m_actions;
-};
+}

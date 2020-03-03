@@ -5,49 +5,51 @@
 
 #include <queue>
 
-
-class CPacket;
-
-class PacketQueue
+namespace CEVPlayer
 {
-public:
-	PacketQueue() {}
-	~PacketQueue() {}
-public:
+	class CPacket;
 
-	void  enqueue(CPacket *val)
+	class PacketQueue
 	{
-		m_queue.push(val);
-	}
+	public:
+		PacketQueue() {}
+		~PacketQueue() {}
+	public:
 
-	void  pop()
-	{
-		m_queue.pop();
-	}
+		void  enqueue(CPacket* val)
+		{
+			m_queue.push(val);
+		}
 
-	void  destroy()
-	{
-		while (!m_queue.empty())
+		void  pop()
+		{
 			m_queue.pop();
-	}
+		}
 
-	size_t  size() const
-	{
-		return m_queue.size();
-	}
+		void  destroy()
+		{
+			while (!m_queue.empty())
+				m_queue.pop();
+		}
 
-	bool  empty() const
-	{
-		return size() == 0;
-	}
+		size_t  size() const
+		{
+			return m_queue.size();
+		}
 
-	CPacket  *first()
-	{
-		if (m_queue.size() > 0)
-			return m_queue.front();
+		bool  empty() const
+		{
+			return size() == 0;
+		}
 
-		return nullptr;
-	}
-protected:
-	std::queue<CPacket*> m_queue;
-};
+		CPacket* first()
+		{
+			if (m_queue.size() > 0)
+				return m_queue.front();
+
+			return nullptr;
+		}
+	protected:
+		std::queue<CPacket*> m_queue;
+	};
+}

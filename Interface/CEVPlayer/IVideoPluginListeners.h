@@ -3,18 +3,21 @@
 
 #pragma once
 
-enum class EVideoPlayerEvents
+namespace CEVPlayer
 {
-	OnPlay,
-	OnPause,
-	OnResume,
-	OnStop,
-	OnSkip, // This event executed when user try skip video & used for UI skiping
-};
+	enum class EVideoPlayerEvents
+	{
+		OnPlay,
+		OnPause,
+		OnResume,
+		OnStop,
+		OnSkip, // This event executed when user try skip video & used for UI skiping
+	};
 
-struct IVideoPlayerEventListener
-{
-	virtual ~IVideoPlayerEventListener() {}
+	struct IVideoPlayerEventListener
+	{
+		virtual ~IVideoPlayerEventListener() {}
 
-	virtual void OnVideoPlayerEvent(const char* videoFileName, EVideoPlayerEvents event) = 0;
-};
+		virtual void OnVideoPlayerEvent(const char* videoFileName, CEVPlayer::EVideoPlayerEvents event) = 0;
+	};
+}

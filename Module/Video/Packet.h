@@ -5,23 +5,26 @@
 
 #include <mkvparser/mkvparser.hpp>
 
-class CPacket
+namespace CEVPlayer
 {
-public:
-	enum class Type
+	class CPacket
 	{
-		Video,
-		Audio
-	};
+	public:
+		enum class Type
+		{
+			Video,
+			Audio
+		};
 
-	CPacket(const mkvparser::Block *block, Type type, double time);
-	~CPacket();
-public:
-	Type                    type() const;
-	const mkvparser::Block* block() const;
-	double                  time() const;
-protected:
-	const mkvparser::Block* m_block;
-	Type                    m_type;
-	double                  m_time;
-};
+		CPacket(const mkvparser::Block* block, Type type, double time);
+		~CPacket();
+	public:
+		Type                    type() const;
+		const mkvparser::Block* block() const;
+		double                  time() const;
+	protected:
+		const mkvparser::Block* m_block;
+		Type                    m_type;
+		double                  m_time;
+	};
+}
