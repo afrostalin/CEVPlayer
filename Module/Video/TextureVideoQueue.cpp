@@ -61,10 +61,7 @@ namespace CEVPlayer
 				if (needDelete->m_textureID)
 				{
 					gEnv->pRenderer->RemoveTexture(needDelete->m_textureID);
-					needDelete->m_textureID = 0;
 				}
-
-				needDelete->m_bMarkForDelete = false;
 
 				needDelete = m_Videos.erase(needDelete);
 			}

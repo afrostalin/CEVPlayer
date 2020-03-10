@@ -94,8 +94,7 @@ namespace CEVPlayer
 			return 0;
 		}
 
-		//int textureID = gEnv->pRenderer->UploadToVideoMemory(nullptr, width, height, eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, name, FT_NOMIPS);
-		int textureID = gEnv->pRenderer->UploadToVideoMemory(nullptr, 512, 512, eTF_R8G8B8A8, eTF_BC4U, 0, false, FILTER_BILINEAR, 0, name, FT_NOMIPS);
+		const int textureID = gEnv->pRenderer->UploadToVideoMemory(nullptr, width, height, eTF_R8G8B8A8, eTF_R8G8B8A8, 0, false, FILTER_BILINEAR, 0, name, FT_NOMIPS);
 
 		LogDebug("<CRenderWrapper> Create texture with id <%d> name <%s> resolution <%dx%d>", textureID, name, width, height);
 		return textureID;
@@ -105,8 +104,7 @@ namespace CEVPlayer
 	{
 		if (gEnv->pRenderer != nullptr)
 		{
-			//gEnv->pRenderer->UpdateTextureInVideoMemory(textureID, pFrame->rgba(), 0, 0, pFrame->displayWidth(), pFrame->displayHeight(), eTF_R8G8B8A8);
-			gEnv->pRenderer->UpdateTextureInVideoMemory(textureID, pFrame->rgba(), 0, 0, 512, 512, eTF_R8G8B8A8);
+			gEnv->pRenderer->UpdateTextureInVideoMemory(textureID, pFrame->rgba(), 0, 0, pFrame->displayWidth(), pFrame->displayHeight(), eTF_R8G8B8A8);
 		}
 	}
 
