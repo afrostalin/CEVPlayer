@@ -1,4 +1,4 @@
-// Copyright (C) 2017-2019 Ilya Chernetsov. All rights reserved. Contacts: <chernecoff@gmail.com>
+// Copyright (C) 2017-2020 Ilya Chernetsov. All rights reserved. Contacts: <chernecoff@gmail.com>
 // License: https://github.com/afrostalin/CEVPlayer/blob/master/LICENSE
 
 #pragma once
