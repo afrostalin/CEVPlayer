@@ -11,6 +11,7 @@
 * Absolutly free license
 
 # Projects using this plugin
+* <a href=https://store.steampowered.com/app/992600/Snake_Path/>Snake Path</a>
 * <a href=https://store.steampowered.com/app/345430/The_Cursed_Forest/>The Cursed Forest</a>
 * <a href=https://store.steampowered.com/app/939510/Pandemic_Express__Zombie_Escape/>Pandemic Express - Zombie Escape</a>
 * <a href=https://store.steampowered.com/app/673240/Room_54/>Room 54</a>
