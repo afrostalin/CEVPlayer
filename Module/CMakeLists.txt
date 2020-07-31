@@ -82,7 +82,7 @@ add_sources("CEVPlayer_video_uber_0.cpp"
 
 end_sources()
 
-CryEngineModule(CEVPlayer FORCE_SHARED_WIN PCH "StdAfx.cpp" SOLUTION_FOLDER "_SpaceRaccoon_/Plugins")
+CryEngineModule(CEVPlayer FORCE_SHARED_WIN PCH "StdAfx.cpp" SOLUTION_FOLDER "Project/Plugins")
 
 target_include_directories(${THIS_PROJECT} 
 	PRIVATE 

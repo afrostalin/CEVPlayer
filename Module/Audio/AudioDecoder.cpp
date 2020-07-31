@@ -99,19 +99,15 @@ namespace CEVPlayer
 
 		data += c;
 
-		unsigned char type = data[0];
-
 		if (!decodeHeader(data, sizes[0]))
 			return false;
 
 		data += sizes[0];
-		type = data[0];
 
 		if (!decodeHeader(data, sizes[1]))
 			return false;
 
 		data += sizes[1];
-		type = data[0];
 
 		int size3 = size - totalSize;
 

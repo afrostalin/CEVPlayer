@@ -37,7 +37,7 @@ namespace CEVPlayer
 
 	double CRenderWrapper::RenderFrameToMainWindow(CVideoFrame* pFrame)
 	{
-		if ((pFrame != nullptr && (pFrame->displayWidth() <= 0 || pFrame->displayHeight() <= 0)) || (gEnv->pRenderer == nullptr))
+		if ((pFrame != nullptr && (pFrame->displayWidth() == 0 || pFrame->displayHeight() == 0)) || (gEnv->pRenderer == nullptr))
 		{
 			return -1.0;
 		}

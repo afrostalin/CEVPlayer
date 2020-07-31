@@ -16,7 +16,7 @@ namespace CEVPlayer
 	class CAudioWrapper
 	{
 	public:
-		CAudioWrapper(CVideoPlayer* parent);
+		explicit CAudioWrapper(CVideoPlayer* parent);
 		~CAudioWrapper();
 	public:
 		void OnAudiDataDecoded(float* values, size_t count);

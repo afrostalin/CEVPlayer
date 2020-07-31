@@ -44,7 +44,7 @@ namespace CEVPlayer
 		};
 
 	public:
-		CFlowNode_2DVideoPlayer(SActivationInfo* pActInfo)
+		explicit CFlowNode_2DVideoPlayer(SActivationInfo* pActInfo)
 		{
 		}
 		~CFlowNode_2DVideoPlayer()
@@ -212,7 +212,7 @@ namespace CEVPlayer
 			eOP_OnTextureCreated,
 		};
 	public:
-		CFlowNode_TextureVideoPlayer(SActivationInfo* pActInfo)
+		explicit CFlowNode_TextureVideoPlayer(SActivationInfo* pActInfo)
 		{
 
 		}
@@ -409,7 +409,7 @@ namespace CEVPlayer
 		};
 
 	public:
-		CFlowNode_FlashVideoPlayer(SActivationInfo* pActInfo) {}
+		explicit CFlowNode_FlashVideoPlayer(SActivationInfo* pActInfo) {}
 
 		virtual ~CFlowNode_FlashVideoPlayer() {}
 
