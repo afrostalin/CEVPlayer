@@ -1,5 +1,8 @@
 
 # Short description
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/659a3d11ec924fc39086ed93c4fa2bf2)](https://app.codacy.com/manual/afrostalin/CEVPlayer?utm_source=github.com&utm_medium=referral&utm_content=afrostalin/CEVPlayer&utm_campaign=Badge_Grade_Dashboard)
+
 **CEVPlayer** - plugin for CRYENGINE V allowing you to play video on the screen and on the game objects
 
 **It's includes :** 
